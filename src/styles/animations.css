@@ -1,0 +1,12 @@
+/** HAMBURGER MENU **/
+rect {
+  transition: 0.3s;
+}
+.side-panel.show rect:nth-child(1) {
+  transform: rotate(45deg) scaleX(0.5);
+  transform-origin: 29px 35px;
+}
+.side-panel.show rect:nth-child(3) {
+  transform: rotate(-45deg) scaleX(0.5);
+  transform-origin: 30px 24px;
+}

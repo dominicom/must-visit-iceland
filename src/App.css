@@ -1,0 +1,111 @@
+* {
+  /* transition: 0.3s; */
+}
+body {
+  overflow: hidden;
+}
+header,
+main {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.app {
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  height: 62px;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 2px solid #999;
+}
+
+
+/* MAP COMPONENT */
+main {
+  height: calc(100vh - 62px);
+  transition: width 0.3s;
+  /* border: 1px solid #036; */
+  outline: none;
+}
+main.panel-hidden {
+  width: 100%;
+}
+main.panel-show {
+  width: calc(100% - 300px);
+}
+/* testowo */
+main #content {
+  width: 100%;
+  background-color: #ddd;
+}
+
+
+
+.hamburger {
+  position: absolute;
+  fill: #999;
+  right: 300px;
+  top: 0;
+  /* TODO: musi byc narazie bo komponent generuje szerszy ekran */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+.info-window {
+  position: absolute;
+  text-align: center;
+  background-color: #fff;
+  padding: 2em 1em 1em;
+  width: 25em;
+  height: 10em;
+  bottom: 250px;
+  transform: translate(-50%, 0);
+  cursor: default;
+  /* overflow-y: hidden; */
+
+   background: #fff;
+   position: relative;
+   border-radius:         5px;
+   box-shadow: 0 2px 6px #000;
+}
+
+
+.info-window #shadow {
+   position: absolute;
+   left: 50%;
+   top: 100%;
+   transform: translate(-15px, 0);
+   width: 50px;
+   height: 25px;
+   background-image: url('./icons/shadow.png');
+   background-repeat: no-repeat;
+}
+.info-window #shadow:before {
+   content:"";
+   position: absolute;
+   transform: translate(-23px, -6px);
+   width: 0;
+   height: 0;
+   border-left: 13px solid transparent;
+   border-right: 13px solid transparent;
+   border-top: 26px solid #fff;
+}
+
+
+
+.info-window .close {
+  position: absolute;
+  background-image: url('./icons/close.svg');
+  background-color: inherit;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "gullfoss",
+    "title": "Gullfoss",
+    "name": "Gullfoss",
+    "category": ["Waterfall", "Nature"],
+    "position": { "lat": 64.3266961, "lng": -20.1226018 },
+    "photos": []
+  },
+  {
+    "id": "blue-lagoon",
+    "title": "Blue Lagoon (geothermal spa)",
+    "name": "Blue Lagoon",
+    "category": ["Geothermal","SPA"],
+    "position": { "lat": 63.8808532, "lng": -22.463849 },
+    "photos": []
+  },
+  {
+    "id": "eyjafjallajökull",
+    "title": "Eyjafjallajökull",
+    "name": "Eyjafjallajökull",
+    "category": ["Vulcano", "Nature"],
+    "position": { "lat": 63.6304134, "lng": -19.6154881 },
+    "photos": []
+  }
+]
