@@ -3,17 +3,10 @@ import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 
 import Marker from './Marker'
+import InfoWindow from './InfoWindow'
 
 
-const InfoWindow = ({ info }) => (
-  <div id="talkbubble" className="info-window">
-    <h2><a>{info.name}</a></h2>
-    <p>{info.title}</p>
-    <button>Details</button>
-    <button className="close">Close</button>
-    <div id="shadow"></div>
-  </div>
-)
+
 
 
 
@@ -39,7 +32,7 @@ class Map extends Component {
 
 
   render () {
-    const { panel, locations, marker, openInfoWindow, infoWindow } = this.props
+    const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow } = this.props
 
 
     return (
@@ -81,19 +74,11 @@ class Map extends Component {
             info={marker}
             lat={marker.position.lat}
             lng={marker.position.lng}
+            eventHandler={this.eventHandler}
+            closeInfoWindow={closeInfoWindow}
             // name={location.name}
           />
-
         )}
-        {/* {openInfoWindow(
-          <InfoWindow
-            info={marker}
-            lat={marker.position.lat}
-            lng={marker.position.lng}
-            // name={location.name}
-          />
-
-        )} */}
 
         </GoogleMapReact>
       </main>

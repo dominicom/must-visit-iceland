@@ -13,23 +13,16 @@ class SidePanel extends Component {
     eventHandler: PropTypes.func.isRequired,
   }
 
-
-
   state = {
     query: '',
     details: false
   }
-
-
-
 
   handleClick() {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
     }));
   }
-
-
 
   queryHandler = (query) => {
     this.setState({ query: query })
@@ -57,6 +50,7 @@ class SidePanel extends Component {
                 key={location.id}
                 location={location}
                 eventHandler={eventHandler}
+                getPhotos={this.props.getPhotos}
               />
             ))}
         </div>

@@ -8,7 +8,6 @@ import Map from './components/Map'
 import MapTheme from './styles/map-style.json';
 
 import * as data from './data/locations.json';
-//import * as FlickrAPI from './utils/FlickrAPI';
 
 import './App.css';
 //import './styles/responsive.css';
@@ -22,12 +21,7 @@ class App extends Component {
     panel: true,
     locations: [],
     selectedMarker: [],
-
-
     infoWindow: false,
-
-    pictures: [],
-
     query: '',
     center: {
       lat: 64.85,
@@ -39,17 +33,15 @@ class App extends Component {
 
   componentDidMount () {
     this.updateLocations();
-    //console.log(this.state.pictures)
-    //this.getImages('new york');
-    //this.getPhotos('iceland');
-    // this.getImages('Hallgrímskirkja');
   }
 
   filterLocations = (query) => {
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
       this.setState({ locations: data.filter(location => match.test(location.name, location.id) )})
-      // This function checks if clicked <Marker/> is matched to filtered locations (markers)
+
+
+      // This function checks if <Marker/> is clicked and matched to filtered locations
       // to prevent leaving <InfoWindow/> Component without <Marker/>
       let filtered = this.state.locations;
       let isMatch = (selected, marker) => {
@@ -69,51 +61,50 @@ class App extends Component {
   }
 
   updateLocations() {
+    // Pushing locations data from local JSON to an Array
     let locations = [];
     locations.push(...data)
-    let photosQueries = locations.map(l => l.name)
-    // photosQueries.forEach(g => {
-    //     this.iteratePhotos(g)
-    //     console.log(g)
-    // })
-    console.log(photosQueries)
-    //locations.map(l => l.photos.push("someURL"))
-    this.setState({ locations: locations })
-    console.log(locations)
-    //books.map(book => (this.state.stack.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
-  }
 
-  iteratePhotos = (image) => {
-    const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
+    // This function gets photos from Flickr and merge to existing locations data in Array
+    locations.map(l => {
 
+      let urls = []
 
+      let getPhotos = (query) => {
+        // TODO
+        const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
 
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${image}&per_page=4&page=1&format=json&nojsoncallback=1`)
-       .then(res => res.json())
-       .then(image => {
-         let picArray = image.photos.photo.map((pic) => {
-           let srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
-           return srcPath
+        let num = 4;
+        let pics = []
+        fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
+          .then(res => res.json())
+          .then(data => {
+
+            let picArray = data.photos.photo.map(pic => {
+
+                 let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg'
+                 return src
+
+           })
+            pics.push(...picArray)
+            //console.log(query, pics)
          })
-         //return picArray
-         //console.log(picArray)
-         //this.setState({pictures: picArray});
-       })
-       //.catch(error => console.log(error));
-       //this.setState({pictures: picArray});
+         //console.log(query, pics)
+         urls.push(pics)
+      }
+
+      let query = `${l.title}`
+      let p = getPhotos(query)
+      console.log(query)
+      l['photos'] = urls[0]
+    })
+
+
+    // Setting merged locations data to the state
+    this.setState({ locations: locations })
+
+    console.log(locations)
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   // Open and close <SidePanel/> function
   toggleSidePanel = (panel) => {
@@ -132,57 +123,17 @@ class App extends Component {
   openInfoWindow = (marker) => {
     this.setState({ selectedMarker: marker, infoWindow: true })
   }
-  // closeInfoWindow = () => {
-  //   this.setState({ selectedMarker: [], infoWindow: false })
-  //   console.log(this.state.infoWindow)
-  // }
-
-
-
-
-  // getImages = (image) => {
-  //   const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
-  //   //const SEARCH = 'gullfoss+waterfall';
-  //   fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${image}&per_page=4&page=1&format=json&nojsoncallback=1`)
-  //      .then(res => res.json())
-  //      .then(image => {
-  //        let picArray = image.photos.photo.map((pic) => {
-  //          var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
-  //          return srcPath
-  //        })
-  //        //console.log(picArray);
-  //        this.setState({ pictures: picArray });
-  //
-  //      })
-  //      .catch(error => console.log(error));
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  closeInfoWindow = () => {
+    console.log("closing")
+    this.setState({ selectedMarker: [], infoWindow: false })
+    console.log(this.state.infoWindow)
+  }
 
   render() {
     const { locations, panel, center, zoom, selectedMarker } = this.state
 
     return (
       <div className="app">
-        {/* {console.log(this.state.infoWindow)} */}
-        {/* {console.log(this.state.pictures)} */}
         <Header />
         <Map
           style={MapTheme}
@@ -193,6 +144,7 @@ class App extends Component {
           eventHandler={this.centerMap}
           marker={selectedMarker}
           openInfoWindow={this.openInfoWindow}
+          closeInfoWindow={this.closeInfoWindow}
           infoWindow={this.state.infoWindow}
         />
         <SidePanel
@@ -203,7 +155,9 @@ class App extends Component {
           filterLocations={this.filterLocations}
           closeInfoWindow={this.closeInfoWindow}
           details={this.state.infoWindow}
+          getPhotos={this.getPhotos}
         />
+        {/* <DetailsPage /> */}
       </div>
     );
   }
