@@ -2,7 +2,7 @@
 
 **Neighbour Map** — original project name customized into personal graphics theme.
 
-Student Project #8 (Final) during Google Front-End Development Nanodegree Program at Udacity made with React.
+Student Project #8 (Final) during Google Front-End Development Nanodegree Program at Udacity made with React and bootstraped from [`create-react-app`](https://github.com/facebook/create-react-app).
 
 **[See live project](https://dominicom.github.io/must-visit-iceland/)**
 
