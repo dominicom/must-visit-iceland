@@ -8,6 +8,7 @@ import Map from './components/Map'
 import MapTheme from './styles/map-style.json';
 
 import * as data from './data/locations.json';
+//import * as key from './data.credentials'
 
 import './App.css';
 //import './styles/responsive.css';
@@ -74,6 +75,7 @@ class App extends Component {
         // TODO
         const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
 
+
         let num = 4;
         let pics = []
         fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
@@ -86,7 +88,8 @@ class App extends Component {
                  return src
 
            })
-            pics.push(...picArray)
+
+           pics.push(...picArray)
             //console.log(query, pics)
          })
          //console.log(query, pics)

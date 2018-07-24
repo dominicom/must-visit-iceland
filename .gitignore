@@ -8,6 +8,14 @@
 
 # production
 /build
+/design
+
+run.bat
+/src/empty-comp.jsx
+CRA-manual.md
+.env
+API-keys.txt
+
 
 # misc
 .DS_Store
