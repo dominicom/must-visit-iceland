@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import escapeRegExp from 'escape-string-regexp'
+import escapeRegExp from 'escape-string-regexp';
 
-import Header from './components/Header.js'
-import SidePanel from './components/SidePanel'
-import Map from './components/Map'
+import Header from './components/Header.js';
+import Map from './components/Map';
+import SidePanel from './components/SidePanel';
+// import DetailsPage from './components/DetailsPage'
 
 import MapTheme from './styles/map-style.json';
-
 import * as data from './data/locations.json';
-//import * as key from './data.credentials'
+//import * as key from './data.credentials';
 
 import './App.css';
 //import './styles/responsive.css';
@@ -38,73 +38,112 @@ class App extends Component {
 
   filterLocations = (query) => {
     if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i')
-      this.setState({ locations: data.filter(location => match.test(location.name, location.id) )})
+      const match = new RegExp(escapeRegExp(query), 'i');
+
+      this.setState({ locations: data.filter(location =>
+        match.test(location.altname ? (location.altname + location.id + location.category) : (location.id + location.name + location.category))
+      )});
 
 
       // This function checks if <Marker/> is clicked and matched to filtered locations
       // to prevent leaving <InfoWindow/> Component without <Marker/>
       let filtered = this.state.locations;
       let isMatch = (selected, marker) => {
-        marker = this.state.selectedMarker
+        marker = this.state.selectedMarker;
         return selected = marker;
       }
       let result = filtered.find(isMatch);
 
-      result ? this.setState({ selectedMarker: result }) : this.setState({ selectedMarker: [] })
-
-
+      result ? this.setState({ selectedMarker: result }) : this.setState({ selectedMarker: [] });
 
     } else {
       this.updateLocations();
     }
-
   }
 
-  updateLocations() {
+
+
+  updateLocations = () => {
     // Pushing locations data from local JSON to an Array
     let locations = [];
     locations.push(...data)
 
+
     // This function gets photos from Flickr and merge to existing locations data in Array
     locations.map(l => {
 
-      let urls = []
+      //Array with request of pictures related to each location
+      let photoUrlData = []
 
       let getPhotos = (query) => {
         // TODO
         const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
-
+        // 0121b6c086d3d8304a761283f8dc1d61
 
         let num = 4;
         let pics = []
         fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
-          .then(res => res.json())
+          .then(res => {
+            //console.log(res);
+            return res.json()})
           .then(data => {
-
             let picArray = data.photos.photo.map(pic => {
 
-                 let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg'
-                 return src
+                 let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
+                 return src;
+                 debugger;
 
            })
 
-           pics.push(...picArray)
+           // Pushing temporary pictures data of one location to an Array
+           pics.push(...picArray);
             //console.log(query, pics)
          })
-         //console.log(query, pics)
-         urls.push(pics)
+
+         // Pushing all pictures results of all locations to an Array
+         photoUrlData.push(pics);
       }
 
-      let query = `${l.title}`
-      let p = getPhotos(query)
-      console.log(query)
-      l['photos'] = urls[0]
+      // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
+      //let query = `${l.title}`;
+
+      let photos = getPhotos(l.title);
+
+      let infoData = [];
+      let getWikiData = (query) => {
+        console.log(query) //&exintro=1
+        fetch(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&titles=${query.replace(/ /g, '_')}&exintro=1`)
+          .then(res => {
+            //console.log(res);
+            return res.json()})
+          .then(data => {
+            //console.log(data.query.pages);
+            //return data.query.pages    //data.query.pages
+
+            // TODO Troche to bardziej zrobić jak ja bym zrobił :P
+            let pages = data.query.pages;
+            let pageId = Object.keys(data.query.pages)[0];
+            let pageContent = pages[pageId].extract;
+
+            console.log(pages);
+
+
+            //infoData.push(data.query.pages);
+            infoData.push(pageContent);
+          })
+          .catch(error => console.log(error))
+      }
+      // Making a request by 'name' variable as a query word of each location as presented in DB from JSON
+      let info = getWikiData(l.title);
+
+      // Pushing all pictures to 'location' Array to 'photos' variable of each location
+      l['photos'] = photoUrlData[0] // [0] - because results are as Array in Array, it needs to "destruct" :)
+      l['info'] = infoData;
     })
 
 
     // Setting merged locations data to the state
-    this.setState({ locations: locations })
+    this.setState({ locations: locations });
 
     console.log(locations)
   }
@@ -118,11 +157,14 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
+
     this.setState({ center: pos });
     this.openInfoWindow(location);
-
   }
 
+
+
+  // Open and Close <InfoWindow/> Component
   openInfoWindow = (marker) => {
     this.setState({ selectedMarker: marker, infoWindow: true })
   }
@@ -132,12 +174,30 @@ class App extends Component {
     console.log(this.state.infoWindow)
   }
 
+
+
+
+
+
+
+
   render() {
-    const { locations, panel, center, zoom, selectedMarker } = this.state
+    const { locations, panel, center, zoom, selectedMarker, infoWindow } = this.state
 
     return (
+
       <div className="app">
         <Header />
+        <SidePanel
+          toggle={this.toggleSidePanel}
+          panel={panel}
+          locations={locations}
+          eventHandler={this.centerMap}
+          filterLocations={this.filterLocations}
+          closeInfoWindow={this.closeInfoWindow}
+          details={infoWindow}
+          getPhotos={this.getPhotos}
+        />
         <Map
           style={MapTheme}
           center={center}
@@ -148,19 +208,14 @@ class App extends Component {
           marker={selectedMarker}
           openInfoWindow={this.openInfoWindow}
           closeInfoWindow={this.closeInfoWindow}
-          infoWindow={this.state.infoWindow}
+          infoWindow={infoWindow}
         />
-        <SidePanel
-          toggle={this.toggleSidePanel}
+
+        {/* <DetailsPage
           panel={panel}
-          locations={locations}
-          eventHandler={this.centerMap}
-          filterLocations={this.filterLocations}
-          closeInfoWindow={this.closeInfoWindow}
-          details={this.state.infoWindow}
-          getPhotos={this.getPhotos}
-        />
-        {/* <DetailsPage /> */}
+          marker={selectedMarker}
+          location={locations}
+        /> */}
       </div>
     );
   }

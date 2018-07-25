@@ -35,16 +35,17 @@ class SidePanel extends Component {
 
     return (
       <aside className={`side-panel ${panel ? 'show' : 'hidden'}`}>
-        <div className="side-panel-bar">
+        <div className="side-panel-bar" tabIndex="0">
           <DebounceInput
             type="text"
             placeholder="Filter..."
             onChange={(event) => this.queryHandler(event.target.value)}
             value={query}
             debounceTimeout={500}
+            aria-label="Filter locations, "
           />
         </div>
-        <div className="places-list">
+        <div className="places-list" tabIndex="0" aria-label={`List of ${locations.length} locations`}>
             {locations.map(location => (
               <Item
                 key={location.id}

@@ -1,5 +1,6 @@
 * {
   /* transition: 0.3s; */
+  outline: none;
 }
 body {
   overflow: hidden;
@@ -14,7 +15,7 @@ main {
   position: relative;
 }
 
-.header {
+header {
   height: 62px;
   width: 100%;
   background-color: #fff;
@@ -28,17 +29,14 @@ main {
   transition: width 0.3s;
   /* border: 1px solid #036; */
   outline: none;
+  overflow: hidden;
 }
 main.panel-hidden {
   width: 100%;
 }
+
 main.panel-show {
   width: calc(100% - 300px);
-}
-/* testowo */
-main #content {
-  width: 100%;
-  background-color: #ddd;
 }
 
 .details-button {
@@ -51,13 +49,9 @@ main #content {
   color: #fff;
   cursor: pointer;
 }
-
-.hamburger {
-  position: absolute;
-  fill: #999;
-  right: 300px;
-  top: 0;
-  /* TODO: musi byc narazie bo komponent generuje szerszy ekran */
-  overflow: hidden;
-  cursor: pointer;
+.details-button:hover {
+  background-color: #004d80;
+}
+.details-button:active {
+  background-color: #06a;
 }

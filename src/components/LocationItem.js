@@ -34,7 +34,14 @@ class Item extends Component {
     const { isToggleOn } = this.state
 
     return (
-      <div className={`item details-${isToggleOn ? 'show' : 'hidden'}`}>
+      <div className={`item details-${isToggleOn ? 'show' : 'hidden'}`}
+           tabIndex="0"
+           aria-label={( location.altname )
+                       ?
+                       ( `Location ${location.name}, in english ${location.altname}, category: ${location.category.join(', ')}` )
+                       :
+                       ( `Location ${location.title}, ${location.category.join(', ')}`)
+                       }>
         <a
           onClick={(event) => {
             event.preventDefault();
@@ -44,6 +51,7 @@ class Item extends Component {
 
         {isToggleOn ? (
         <div className="details">
+          <h4>{location.altname ? location.altname : `${location.title} ${location.category[0]}`}</h4>
           <ul>
             {location.category.map(tag => (
               <li key={tag} className="tag">{tag}</li>

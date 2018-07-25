@@ -1,82 +1,107 @@
-[
-  {
-    "id": "gullfoss",
-    "title": "Gullfoss Waterfall",
-    "name": "Gullfoss",
-    "category": ["Waterfall", "Nature"],
-    "position": { "lat": 64.3266961, "lng": -20.1226018 },
-    "photos": []
-  },
-  {
-    "id": "dettifoss",
-    "title": "Dettifoss Waterfall",
-    "name": "Dettifoss",
-    "category": ["Waterfall", "Nature"],
-    "position": { "lat": 65.7156257, "lng": -16.397638 },
-    "photos": []
-  },
-  {
-    "id": "blue-lagoon",
-    "title": "Blue Lagoon (geothermal spa)",
-    "name": "Blue Lagoon",
-    "category": ["Geothermal","SPA"],
-    "position": { "lat": 63.8808532, "lng": -22.463849 },
-    "photos": []
-  },
-  {
-    "id": "eyjafjallajokull",
-    "title": "Eyjafjallajökull",
-    "name": "Eyjafjallajökull",
-    "category": ["Vulcano", "Nature"],
-    "position": { "lat": 63.6304134, "lng": -19.6154881 },
-    "photos": []
-  },
-  {
-    "id": "hallgrimskirkja",
-    "title": "Hallgrímskirkja Church",
-    "name": "Hallgrímskirkja",
-    "category": ["Building", "Architecture"],
-    "position": { "lat": 64.1417149, "lng": -21.9288257 },
-    "photos": []
-  },
-  {
-    "id": "jokulsarlon",
-    "title": "Jökulsárlón Glacier",
-    "name": "Jökulsárlón",
-    "category": ["Glacier", "Nature"],
-    "position": { "lat": 64.0761707, "lng": -16.2793214 },
-    "photos": []
-  },
-  {
-    "id": "thingvellir",
-    "title": "Þingvellir National Park",
-    "name": "Þingvellir",
-    "category": ["Park", "Nature"],
-    "position": { "lat": 64.2558284, "lng": -21.1298615 },
-    "photos": []
-  },
-  {
-    "id": "silfra",
-    "title": "Silfra Diving",
-    "name": "Silfra",
-    "category": ["Diving", "Nature"],
-    "position": { "lat": 64.26139, "lng": -21.1060561 },
-    "photos": []
-  },
-  {
-    "id": "kerid",
-    "title": "Kerið Crater",
-    "name": "Kerið",
-    "category": ["Lake", "Crater", "Nature"],
-    "position": { "lat": 64.0412785, "lng": -20.8873353 },
-    "photos": []
-  },
-  {
-    "id": "strokkur",
-    "title": "Strokkur",
-    "name": "Strokkur",
-    "category": ["Geyser", "Nature"],
-    "position": { "lat": 64.31271, "lng": -20.30072 },
-    "photos": []
-  }
+[{
+		"id": "gullfoss",
+		"title": "Gullfoss",
+		"name": "Gullfoss",
+		"category": ["Waterfall", "Nature"],
+		"position": {
+			"lat": 64.3266961,
+			"lng": -20.1226018
+		},
+		"altname": "Golden Falls"
+	},
+	{
+		"id": "dettifoss",
+		"title": "Dettifoss",
+		"name": "Dettifoss",
+		"category": ["Waterfall", "Nature"],
+		"position": {
+			"lat": 65.7156257,
+			"lng": -16.397638
+		}
+	},
+	{
+		"id": "blaa-lonid",
+		"title": "Blue Lagoon (geothermal spa)",
+		"name": "Bláa lónið",
+		"category": ["Geothermal", "SPA"],
+		"position": {
+			"lat": 63.8808532,
+			"lng": -22.463849
+		},
+		"altname": "Blue Lagoon"
+	},
+	{
+		"id": "eyjafjallajokull",
+		"title": "Eyjafjallajökull",
+		"name": "Eyjafjallajökull",
+		"category": ["Vulcano", "Nature"],
+		"position": {
+			"lat": 63.6304134,
+			"lng": -19.6154881
+		}
+	},
+	{
+		"id": "hallgrimskirkja",
+		"title": "Hallgrímskirkja",
+		"name": "Hallgrímskirkja",
+		"category": ["Building", "Architecture"],
+		"position": {
+			"lat": 64.1417149,
+			"lng": -21.9288257
+		},
+		"altname": "Church of Hallgrímur"
+	},
+	{
+		"id": "jokulsarlon",
+		"title": "Jökulsárlón",
+		"name": "Jökulsárlón",
+		"category": ["Glacier", "Nature"],
+		"position": {
+			"lat": 64.0761707,
+			"lng": -16.2793214
+		},
+		"altname": "Glacial River Lagoon"
+	},
+	{
+		"id": "thingvellir",
+		"title": "Þingvellir",
+		"name": "Þingvellir",
+		"category": ["Park", "Nature"],
+		"position": {
+			"lat": 64.2558284,
+			"lng": -21.1298615
+		},
+		"altname": "Thingvellir National Park"
+	},
+	{
+		"id": "silfra",
+		"title": "Silfra",
+		"name": "Silfra",
+		"category": ["Diving", "Nature"],
+		"position": {
+			"lat": 64.26139,
+			"lng": -21.1060561
+		}
+	},
+	{
+		"id": "kerid",
+		"title": "Kerið",
+		"name": "Kerið",
+		"category": ["Lake", "Crater", "Nature"],
+		"position": {
+			"lat": 64.0412785,
+			"lng": -20.8873353
+		},
+		"altname": "Kerid"
+	},
+	{
+		"id": "strokkur",
+		"title": "Strokkur",
+		"name": "Strokkur",
+		"category": ["Geyser", "Nature"],
+		"position": {
+			"lat": 64.31271,
+			"lng": -20.30072
+		}
+	}
 ]

@@ -7,9 +7,11 @@ const InfoWindow = ({ info, infoWindow, closeInfoWindow }) => {
     return (
       <div id="talkbubble" className="info-window">
         <h2>{info.title}</h2>
+        <h3>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h3>
         <button className="details-button">Details</button>
         <button className="close"
-                onClick={(event) => closeInfoWindow()}>Close</button>
+                onClick={(event) => closeInfoWindow()}
+        >Close</button>
         <div id="shadow"></div>
       </div>
     )

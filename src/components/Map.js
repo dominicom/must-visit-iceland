@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
-
+import DetailsPage from './DetailsPage'
 
 
 
@@ -18,7 +18,7 @@ class Map extends Component {
   }
 
   state = {
-    marker: []
+    //marker: []
   }
 
 
@@ -38,20 +38,27 @@ class Map extends Component {
     return (
       <main
         className={`panel-${panel ? 'show' : 'hidden'}`}
-        tabIndex="-1"
-        role="application"
-      >
 
+      >
+        {/* <DetailsPage
+          panel={panel}
+          marker={marker}
+          locations={locations}
+        /> */}
         <GoogleMapReact
           bootstrapURLKeys={{
             key: 'AIzaSyDwEALhx2jYlIf__h8kulneoYOP5_F0evw',
             languages: ['en', 'is'],
             region: 'is'
-
+            // TODO add something extra???
           }}
-          options={{ styles: this.props.style }}
+          options={{ styles: this.props.style,
+                     scrollwheel: true
+          }}
           center={this.props.center}
           zoom={this.props.zoom}
+          tabIndex="-1"
+          role="application"
         >
 
         {/* Populate Markers */}
@@ -63,6 +70,7 @@ class Map extends Component {
             name={location.name}
             location={location}
             eventHandler={this.eventHandler}
+            marker={marker}
           />
         ))}
 
@@ -81,6 +89,8 @@ class Map extends Component {
         )}
 
         </GoogleMapReact>
+
+
       </main>
     );
   }

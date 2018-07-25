@@ -1,14 +1,17 @@
-.pin {
+.marker {
   width: 48px;
   height: 64px;
   transform: translate(-50%, -100%);
   cursor: pointer;
 }
-/* .pin span {
-  margin: 20px 0 0 50px;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #ccc;
-  text-shadow: -1px 0 #06a, 0 1px #06a, 1px 0 #06a, 0 -1px #06a, 0 0 5px #000;
-} */
+
+.marker.bounce {
+  animation: bounce 0.8s cubic-bezier(.20,.70,.80,.60);
+}
+
+
+@keyframes bounce {
+   33% { transform: translate(-50%, -100%); }
+   66% { transform: translate(-50%, -130%); }
+  100% { transform: translate(-50%, -100%); }
+}
