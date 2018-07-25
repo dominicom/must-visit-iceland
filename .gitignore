@@ -9,10 +9,9 @@ node_modules
 # production
 build
 design
-
+scr/utils
 run.bat
-src/empty-comp.jsx
-
+.env
 
 
 # misc
@@ -22,7 +21,7 @@ src/empty-comp.jsx
 .env.test.local
 .env.production.local
 
-.env
+
 
 CRA-manual.md
 API-keys.txt

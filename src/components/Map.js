@@ -32,14 +32,12 @@ class Map extends Component {
 
 
   render () {
+    
     const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow, modal, closeModal, openModal } = this.props
-
 
     return (
       <main
-        className={`panel-${panel ? 'show' : 'hidden'}`}
-
-      >
+        className={`panel-${panel ? 'show' : 'hidden'}`}>
 
         <DetailsPage
           panel={panel}
@@ -93,7 +91,6 @@ class Map extends Component {
         )}
 
         </GoogleMapReact>
-        {console.log("Map Component: ", openModal)}
 
       </main>
     );

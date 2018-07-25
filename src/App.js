@@ -12,7 +12,7 @@ import * as data from './data/locations.json';
 
 import './App.css';
 //import './styles/responsive.css';
-import './styles/animations.css';
+//import './styles/animations.css';
 
 
 
@@ -65,12 +65,13 @@ class App extends Component {
 
 
   updateLocations = () => {
-    // Pushing locations data from local JSON to an Array
+    // Pushing locations and initial data from local JSON to an Array - './data/locations.json'
     let locations = [];
     locations.push(...data)
 
 
-    // This function gets photos from Flickr and merge to existing locations data in Array
+    // This function gets photos from Flickr and Wiki Data
+    // Next it merges to existing locations data in Array
     locations.map(l => {
 
       //Array with request of pictures related to each location
@@ -79,7 +80,6 @@ class App extends Component {
       let getPhotos = (query) => {
         // TODO
         const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
-        // 0121b6c086d3d8304a761283f8dc1d61
 
         let num = 4;
         let pics = []
@@ -92,7 +92,6 @@ class App extends Component {
 
                  let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
                  return src;
-                 debugger;
 
            })
 
@@ -103,6 +102,8 @@ class App extends Component {
 
          // Pushing all pictures results of all locations to an Array
          photoUrlData.push(pics);
+         console.log(Object.keys(pics))
+         console.log(pics)
       }
 
       // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
@@ -110,6 +111,8 @@ class App extends Component {
 
       let photos = getPhotos(l.title);
 
+
+      //
       let infoData = [];
       let getWikiData = (query) => {
         console.log(query) //&exintro=1
@@ -122,19 +125,25 @@ class App extends Component {
             //return data.query.pages    //data.query.pages
 
             // TODO Troche to bardziej zrobić jak ja bym zrobił :P
-            let pages = data.query.pages;
-            let pageId = Object.keys(data.query.pages)[0];
-            let pageContent = pages[pageId].extract;
+            // let pages = data.query.pages;
+            // let pageId = Object.keys(data.query.pages)[0];
+            // let pageContent = pages[pageId].extract;
 
-            console.log(pages);
+            let content = data.query.pages[Object.keys(data.query.pages)[0]].extract;
+
+            //console.log(pages);
 
 
             //infoData.push(data.query.pages);
-            infoData.push(pageContent);
+            //infoData.push(pageContent);
+            infoData.push(content);
           })
           .catch(error => console.log(error))
       }
-      // Making a request by 'name' variable as a query word of each location as presented in DB from JSON
+
+
+
+      // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
       let info = getWikiData(l.title);
 
       // Pushing all pictures to 'location' Array to 'photos' variable of each location
@@ -158,7 +167,6 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
-
     this.setState({ center: pos });
     this.openInfoWindow(location);
   }
@@ -170,17 +178,16 @@ class App extends Component {
     this.setState({ selectedMarker: marker, infoWindow: true })
   }
   closeInfoWindow = () => {
-    //console.log("closing")
     this.setState({ selectedMarker: [], infoWindow: false })
     console.log(this.state.infoWindow)
   }
+
+  // Open and Close <DetailsPage/> Component
   openModal = () => {
     this.setState({ modal: true })
   }
   closeModal = () => {
-    console.log("closing")
     this.setState({ modal: false })
-    console.log(this.state.infoWindow)
   }
 
 
@@ -225,12 +232,6 @@ class App extends Component {
           openModal={this.openModal}
         />
 
-        {/* <DetailsPage
-          panel={panel}
-          marker={selectedMarker}
-          location={locations}
-        /> */}
-        {/* {console.log("App Component: ", this.openModal)} */}
       </div>
     );
   }

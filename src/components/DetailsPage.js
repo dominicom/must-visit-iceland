@@ -15,8 +15,12 @@ class DetailsPage extends Component {
   componentDidMount() {
     ReactDOM.findDOMNode(this.refs.ref)
     //this.refs.ref.getDOMNode().focus();
+    this.nv.addEventListener("focus", this.handleNvEnter);
   }
 
+  handleNvEnter = (event) => {
+     console.log("focus:", event);
+   }
 
   render () {
     const { panel, marker, location, modal, closeModal } = this.props;
@@ -33,6 +37,7 @@ class DetailsPage extends Component {
            // onFocus={modal ? true : false}
            // ref={this.myRef}
            // ref="ref"
+           ref={elem => this.nv = elem}
       >
 
       {marker.length !== 0 ? (
@@ -41,11 +46,13 @@ class DetailsPage extends Component {
                  tabIndex="0"
                  role="dialog"
                  //ref={this.myRef}
+
                  // ref="item" onLoad={() => this.refs.item.focus()}
                  //autoFocus="true"
                  aria-labelledby="myDialog"
                  aria-modal="true"
-                 ref="ref"
+                 //ref="ref"
+                 id="dialog-box"
         >
 
 
