@@ -30,7 +30,7 @@ class SidePanel extends Component {
   }
 
   render () {
-    const { toggle, panel, locations, eventHandler } = this.props
+    const { toggle, panel, locations, eventHandler, openModal } = this.props
     const { query, details } = this.state
 
     return (
@@ -52,6 +52,7 @@ class SidePanel extends Component {
                 location={location}
                 eventHandler={eventHandler}
                 getPhotos={this.props.getPhotos}
+                openModal={openModal}
               />
             ))}
         </div>

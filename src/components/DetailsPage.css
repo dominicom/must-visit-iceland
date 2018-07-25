@@ -1,24 +1,21 @@
 .location-detail-page {
-  position: absolute;
-  /* transform: translateX(-50%); */
+  position: relative;
   background-color: #fff;
-  /* width: 100%; */
-  /* height: calc(100vh - 62px); */
-  height: 100vh;
+  height: calc(100vh - 120px);
   transition: 0.3s;
-  /* transition: bottom 0.8s; */
-  z-index: 99;
+  margin: 60px auto 0 auto;
+  /* min-width: 100%; */
+  max-width: 800px;
 }
 .location-detail-page.panel-hidden {
   /* left: 50%; */
-  left: 0;
-  width: 100%;
+
 }
 .location-detail-page.panel-show {
   /* left: calc(50% - 150px); */
-  left: 0;
+
   /* width: calc(100% - 300px); */
-  width: 100%;
+
 }
 
 
@@ -61,48 +58,82 @@
 .location-detail-page.close {
   top: calc(100vh - 30px);
 }
-.top-bar,
+.name,
 .photos,
 .facts,
 .position {
-  padding: 0 3em;
+  /* font-size: 25px; */
+  padding: 0 2em;
 }
 
 
 
 
 
-.top-bar {
-
+.name {
+  text-align: left;
 }
 
 
 .location-detail-page .photos {
+  display: block;
+  text-align: left;
+
+}
+.photos-gallery,
+.photos-link {
   display: flex;
+  flex-basis: auto;
+  /* flex-direction: row; */
+  justify-content: space-between;
 }
 
-.location-detail-page .photo {
-  width: 150px;
-  height: 150px;
+
+.photos-gallery {
+  padding-left: 0;
+}
+.photos-gallery li {
+  margin: 0.5em 0.5em 0 0;
+}
+.photos-gallery li:last-child {
+  margin-right: 0;
+}
+.photos-gallery .photo {
+
+  width: 100%;
+  height: 100%;
+
   background-color: #333;
-  background-size: cover;
-  margin: 0.2em 0.2em 0 0;
+
+  object-fit: cover;
+
+
+}
+
+.photos-link {
+  font-size: 0.7em;
+}
+.photos-link a {
+  color: #06a;
 }
 
 .location-detail-page .facts {
   text-align: left;
-  font-size: 0.8em;
   font-weight: 300;
   max-height: 200px;
   overflow-y: auto;
   background-color: #f1f1f1;
-
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;
 }
+.facts .content {
+  font-size: 0.8em;
+}
+
+
 .location-detail-page .position {
   text-align: left;
-  font-size: 0.75em;
+  /* font-size: 0.75em; */
   font-weight: 300;
   color: #999;
 }
@@ -127,6 +158,51 @@
   right: 10px;
   width: 20px;
   height: 20px;
+  font-size: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  background-color: rgb(0, 0, 0, 0.5)
+}
+.modal.opened {
+  display: block;
+}
+.modal.closed {
+  display: none;
+}
+.location-detail-page .close {
+  position: absolute;
+  background-image: url('../icons/close.svg');
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
   font-size: 0;
   border: none;
   outline: none;

@@ -32,7 +32,7 @@ class Map extends Component {
 
 
   render () {
-    const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow } = this.props
+    const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow, modal, closeModal, openModal } = this.props
 
 
     return (
@@ -40,11 +40,14 @@ class Map extends Component {
         className={`panel-${panel ? 'show' : 'hidden'}`}
 
       >
-        {/* <DetailsPage
+
+        <DetailsPage
           panel={panel}
           marker={marker}
           locations={locations}
-        /> */}
+          modal={modal}
+          closeModal={closeModal}
+        />
         <GoogleMapReact
           bootstrapURLKeys={{
             key: 'AIzaSyDwEALhx2jYlIf__h8kulneoYOP5_F0evw',
@@ -84,12 +87,13 @@ class Map extends Component {
             lng={marker.position.lng}
             eventHandler={this.eventHandler}
             closeInfoWindow={closeInfoWindow}
-            // name={location.name}
+            openModal={openModal}
           />
+
         )}
 
         </GoogleMapReact>
-
+        {console.log("Map Component: ", openModal)}
 
       </main>
     );

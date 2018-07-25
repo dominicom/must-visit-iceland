@@ -30,7 +30,7 @@ class Item extends Component {
 
 
   render () {
-    const { location } = this.props
+    const { location, openModal } = this.props
     const { isToggleOn } = this.state
 
     return (
@@ -70,7 +70,9 @@ class Item extends Component {
             ))}
           </ul>
 
-          <button className="details-button">Details</button>
+          <button className="details-button"
+                  onClick={(event) => openModal()}
+          >Details</button>
           {/* <div className="list-item-description">
             <p>Lorem Ipsum Dolor Met Madafaka Szit Heppens</p>
           </div> */}

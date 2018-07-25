@@ -23,6 +23,7 @@ class App extends Component {
     locations: [],
     selectedMarker: [],
     infoWindow: false,
+    modal: false,
     query: '',
     center: {
       lat: 64.85,
@@ -169,8 +170,16 @@ class App extends Component {
     this.setState({ selectedMarker: marker, infoWindow: true })
   }
   closeInfoWindow = () => {
-    console.log("closing")
+    //console.log("closing")
     this.setState({ selectedMarker: [], infoWindow: false })
+    console.log(this.state.infoWindow)
+  }
+  openModal = () => {
+    this.setState({ modal: true })
+  }
+  closeModal = () => {
+    console.log("closing")
+    this.setState({ modal: false })
     console.log(this.state.infoWindow)
   }
 
@@ -182,7 +191,7 @@ class App extends Component {
 
 
   render() {
-    const { locations, panel, center, zoom, selectedMarker, infoWindow } = this.state
+    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal } = this.state
 
     return (
 
@@ -197,6 +206,8 @@ class App extends Component {
           closeInfoWindow={this.closeInfoWindow}
           details={infoWindow}
           getPhotos={this.getPhotos}
+          modal={modal}
+          openModal={this.openModal}
         />
         <Map
           style={MapTheme}
@@ -209,6 +220,9 @@ class App extends Component {
           openInfoWindow={this.openInfoWindow}
           closeInfoWindow={this.closeInfoWindow}
           infoWindow={infoWindow}
+          modal={modal}
+          closeModal={this.closeModal}
+          openModal={this.openModal}
         />
 
         {/* <DetailsPage
@@ -216,6 +230,7 @@ class App extends Component {
           marker={selectedMarker}
           location={locations}
         /> */}
+        {/* {console.log("App Component: ", this.openModal)} */}
       </div>
     );
   }
