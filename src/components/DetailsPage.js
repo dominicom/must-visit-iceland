@@ -6,84 +6,68 @@ import './DetailsPage.css'
 
 
 class DetailsPage extends Component {
-  constructor(props) {
-    super(props);
-    //this.myRef = React.createRef();
-  }
-
-
-  componentDidMount() {
-    ReactDOM.findDOMNode(this.refs.ref)
-    //this.refs.ref.getDOMNode().focus();
-    this.nv.addEventListener("focus", this.handleNvEnter);
-  }
-
-  handleNvEnter = (event) => {
-     console.log("focus:", event);
-   }
 
   render () {
     const { panel, marker, location, modal, closeModal } = this.props;
 
+    let latitude  = `${marker.position ? marker.position.lat.toFixed(4).toString() : undefined}`;
+    let longitude = `${marker.position ? marker.position.lng.toFixed(4).toString() : undefined}`;
+
     return (
 
 
-      <div className={`modal ${modal ? 'opened' : 'closed'}`}
-
-           //tabIndex={`${modal ? '0' : '-1'}`}
-           // tabIndex={modal ? 0 : -1}
-           // role="dialog"
-           // aria-hidden={modal ? false : true}
-           // onFocus={modal ? true : false}
-           // ref={this.myRef}
-           // ref="ref"
-           ref={elem => this.nv = elem}
-      >
+      <div className={`modal ${modal ? 'opened' : 'closed'}`}>
 
       {marker.length !== 0 ? (
         <section className="location-detail-page"
-                 //tabIndex={modal ? 1 : -1}
                  tabIndex="0"
                  role="dialog"
-                 //ref={this.myRef}
-
-                 // ref="item" onLoad={() => this.refs.item.focus()}
-                 //autoFocus="true"
-                 aria-labelledby="myDialog"
-                 aria-modal="true"
-                 //ref="ref"
-                 id="dialog-box"
-        >
+                 aria-label= {`You have opened details page of ${marker.altname ? marker.name + ' ' + marker.altname : marker.name}`}
+                 aria-modal="true">
 
 
 
-        <h2 className="name" tabIndex="0">{marker.name}</h2>
-        <article className="photos" tabIndex="0">
+        <h2 className="name" tabIndex="0">{marker.altname ? `${marker.name} (${marker.altname})` : `${marker.name}`}</h2>
+
+
+        <article className="photos">
+
           <ul className="photos-gallery">
           {marker.photos ? marker.photos.map(photo => (
-            <li key={photo}
-                // style={{ backgroundImage: `url(${photo})` }}
-                //className="photo"
-                ><img className="photo" alt={`Photo of ${marker.name}`} src={photo}/>
+            <li key={photo}>
+                  <a href={photo}
+                     target="_blank"
+                     aria-label={`Image of ${marker.name}`}>
+                    <div className="photo"
+                         style={{ backgroundImage: `url(${photo})` }}
+                         role="img">
+                    </div>
+                  </a>
             </li>
           )) : undefined}
           </ul>
+
+
           <div className="photos-link">
             <span>Powered by Flickr</span>
             <a href={`https://www.flickr.com/search/?text=${marker.title}`} target="_blank">More photos...</a>
           </div>
 
         </article>
-        <article className="facts">
+
+
+        <article className="facts" tabIndex="0">
           <div className="content" dangerouslySetInnerHTML={{__html: marker.info }}></div>
-          {/* {marker ? marker.info : undefined} */}
         </article>
-        <article className="position">
-          <div><h4>GPS:</h4></div>
-          <div>
-          <p>N: <span>{`${marker.position ? marker.position.lat.toString() : undefined}`}</span></p>
-          <p>W: <span>{`${marker.position ? marker.position.lng.toString().replace('-', '') : undefined}`}</span></p>
-          </div>
+
+
+        <article className="position"
+                 tabIndex="0"
+                 aria-label="Position GPS">
+
+            <p aria-disabled="true">GPS:</p>
+            <p>N: <span tabIndex="0" aria-label={`Latitude ${latitude} °N`}>{latitude}</span></p>
+            <p>E: <span tabIndex="0" aria-label={`Longitude ${longitude} °E`}>{longitude}</span></p>
         </article>
 
 
@@ -93,26 +77,11 @@ class DetailsPage extends Component {
         <button className="close"
                 onClick={(event) => closeModal()}>Close</button>
 
-
-
-
-
         </section>
+
       ) : (
-
-        <span> No location selected </span>
+        <span>No location selected or information loaded</span>
       )}
-
-
-
-
-
-
-
-
-
-
-
 
       </div>
     );

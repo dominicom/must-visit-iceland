@@ -4,7 +4,6 @@ import escapeRegExp from 'escape-string-regexp';
 import Header from './components/Header.js';
 import Map from './components/Map';
 import SidePanel from './components/SidePanel';
-// import DetailsPage from './components/DetailsPage'
 
 import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
@@ -19,7 +18,7 @@ import './App.css';
 class App extends Component {
 
   state = {
-    panel: true,
+    panel: false,
     locations: [],
     selectedMarker: [],
     infoWindow: false,
@@ -74,15 +73,15 @@ class App extends Component {
     // Next it merges to existing locations data in Array
     locations.map(l => {
 
-      //Array with request of pictures related to each location
-      let photoUrlData = []
+      //Get photos from Flickr
+      let photoUrlData = [];
 
       let getPhotos = (query) => {
-        // TODO
+
         const FLICKR_KEY = '0121b6c086d3d8304a761283f8dc1d61';
 
         let num = 4;
-        let pics = []
+        let pics = [];
         fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
           .then(res => {
             //console.log(res);
@@ -102,8 +101,6 @@ class App extends Component {
 
          // Pushing all pictures results of all locations to an Array
          photoUrlData.push(pics);
-         console.log(Object.keys(pics))
-         console.log(pics)
       }
 
       // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
@@ -112,33 +109,27 @@ class App extends Component {
       let photos = getPhotos(l.title);
 
 
-      //
+      // Wiki get data function
       let infoData = [];
+
       let getWikiData = (query) => {
-        console.log(query) //&exintro=1
+
         fetch(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&titles=${query.replace(/ /g, '_')}&exintro=1`)
           .then(res => {
-            //console.log(res);
             return res.json()})
           .then(data => {
-            //console.log(data.query.pages);
-            //return data.query.pages    //data.query.pages
-
-            // TODO Troche to bardziej zrobić jak ja bym zrobił :P
-            // let pages = data.query.pages;
-            // let pageId = Object.keys(data.query.pages)[0];
-            // let pageContent = pages[pageId].extract;
 
             let content = data.query.pages[Object.keys(data.query.pages)[0]].extract;
-
-            //console.log(pages);
-
-
-            //infoData.push(data.query.pages);
-            //infoData.push(pageContent);
             infoData.push(content);
+
           })
-          .catch(error => console.log(error))
+          .catch(error => {
+
+            console.log(error);
+            let content = `<p>Sorry, there is an error loading information about ${query}. Find out some information on Wikipedia by clicking <a href="https://en.wikipedia.org/wiki/${query}" target="_blank">here</a>.</p>`;
+            infoData.push(content);
+
+          })
       }
 
 

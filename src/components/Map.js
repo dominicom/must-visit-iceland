@@ -32,7 +32,7 @@ class Map extends Component {
 
 
   render () {
-    
+
     const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow, modal, closeModal, openModal } = this.props
 
     return (
@@ -58,7 +58,7 @@ class Map extends Component {
           }}
           center={this.props.center}
           zoom={this.props.zoom}
-          tabIndex="-1"
+          tabIndex={panel ? 0 : -1}
           role="application"
         >
 
@@ -72,6 +72,7 @@ class Map extends Component {
             location={location}
             eventHandler={this.eventHandler}
             marker={marker}
+            panel={panel}
           />
         ))}
 

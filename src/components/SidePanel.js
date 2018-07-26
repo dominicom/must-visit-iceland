@@ -3,7 +3,7 @@ import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 
 import Hamburger from './Hamburger';
-import Item from './LocationItem'
+import Item from './Item'
 
 import './SidePanel.css';
 
@@ -35,17 +35,26 @@ class SidePanel extends Component {
 
     return (
       <aside className={`side-panel ${panel ? 'show' : 'hidden'}`}>
-        <div className="side-panel-bar" tabIndex="0">
+
+        <Hamburger
+          toggle={toggle}
+          panel={panel}
+        />
+
+        <div className="side-panel-bar">
           <DebounceInput
             type="text"
             placeholder="Filter..."
             onChange={(event) => this.queryHandler(event.target.value)}
             value={query}
             debounceTimeout={500}
-            aria-label="Filter locations, "
+            tabIndex={panel ? 0 : -1}
+            aria-label="Filter locations"
+            aria-hidden={panel ? false : true}
           />
         </div>
-        <div className="places-list" tabIndex="0" aria-label={`List of ${locations.length} locations`}>
+
+        <div className="places-list" tabIndex={panel ? 0 : -1} aria-label={`List of ${locations.length} locations`}>
             {locations.map(location => (
               <Item
                 key={location.id}
@@ -53,13 +62,10 @@ class SidePanel extends Component {
                 eventHandler={eventHandler}
                 getPhotos={this.props.getPhotos}
                 openModal={openModal}
+                panel={panel}
               />
             ))}
         </div>
-        <Hamburger
-          toggle={toggle}
-          panel={panel}
-        />
       </aside>
     );
   }

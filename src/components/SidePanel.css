@@ -1,11 +1,8 @@
-/* --- SIDE PANEL --- */
-
 .side-panel {
   position: fixed;
   width: 300px;
   height: 100%;
   top: 0;
-  /* border-left: 2px solid #999; */
   background-color: #f1f1f1;
   z-index: 10;
   display: block;
@@ -19,7 +16,9 @@
   right: -300px;
 }
 
+
 /* FILTER BAR */
+
 .side-panel-bar {
   flex: 1;
   width: 100%;
@@ -48,13 +47,35 @@
   overflow-y: scroll;
   text-align: left;
 }
-/* .places-list .item:target p {
-  display: block;
-} */
+
+/* HAMBURGER ---> './Hamburger.css' */
 
 
-/* testowo */
-.places-list#content {
-  width: 100%;
-  height: 1000px;
+
+
+@media screen and (max-width: 360px) {
+  .side-panel {
+    width: 100%;
+    height: calc(100vh - 62px);
+    top: 62px;
+  }
+  .side-panel.show {
+    right: 0;
+  }
+  .side-panel.hidden {
+    right: -100%;
+  }
+  .places-list {
+    height: calc(100% - 62px);
+  }
+  .hamburger {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+  }
+  main.panel-show,
+  main.panel-hidden {
+    width: 100%;
+  }
 }

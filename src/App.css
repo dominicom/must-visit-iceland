@@ -1,5 +1,4 @@
 * {
-  /* transition: 0.3s; */
   outline: none;
 }
 body {
@@ -15,11 +14,34 @@ main {
   position: relative;
 }
 
-header {
+
+
+/* HEADER COMPONENT */
+
+.logo {
   height: 62px;
   width: 100%;
   background-color: #fff;
   border-bottom: 2px solid #999;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.flag {
+  width: 50px;
+  height: 36px;
+  margin: auto 1em;
+}
+.slogan {
+  margin: auto 1em auto 0;
+  padding: 0;
+  color: #06a;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+@media screen and (max-width: 360px) {
+  .slogan {
+    display: none;
+  }
 }
 
 
@@ -27,7 +49,6 @@ header {
 main {
   height: calc(100vh - 62px);
   transition: width 0.3s;
-  /* border: 1px solid #036; */
   outline: none;
   overflow: hidden;
 }
@@ -38,6 +59,9 @@ main.panel-hidden {
 main.panel-show {
   width: calc(100% - 300px);
 }
+
+
+/* COMMON ELEMENTS */
 
 .details-button {
   border: none;

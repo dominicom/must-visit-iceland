@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Hamburger.css' 
+import './Hamburger.css'
 
 const Hamburger = ({ toggle, state }) => {
     return (
-      <div
+      <nav tabIndex="0" aria-label="Open or Close filter and list of locations"
         className="hamburger"
         onClick={(event) => toggle(state)}
         style={{
@@ -17,7 +17,7 @@ const Hamburger = ({ toggle, state }) => {
           <rect x={10} y={27} className="hamburger-element" width={40} height={4}/>
           <rect x={10} y={39} className="hamburger-element" width={40} height={4}/>
         </svg>
-      </div>
+      </nav>
     );
 }
 

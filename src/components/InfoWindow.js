@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import * as FocusTrap from '../utils/FocusTrap';
 
 import './InfoWindow.css';
+
+
+
+
 
 const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal }) => {
 
@@ -13,7 +18,10 @@ const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal }) => {
 
 
         <button className="details-button"
-                onClick={(event) => openModal()}>Details</button>
+                onClick={(event) => {
+                  openModal();
+                  FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
+                }}>Details</button>
 
 
         <button className="close"
