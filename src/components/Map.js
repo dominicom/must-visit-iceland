@@ -7,18 +7,11 @@ import InfoWindow from './InfoWindow'
 import DetailsPage from './DetailsPage'
 
 
-
-
-
 class Map extends Component {
   static propTypes = {
     panel: PropTypes.bool.isRequired,
     locations: PropTypes.array.isRequired,
     eventHandler: PropTypes.func.isRequired
-  }
-
-  state = {
-    //marker: []
   }
 
 
@@ -28,21 +21,32 @@ class Map extends Component {
   }
 
 
+  drawError = (map, wiki, flickr) => {
+    return (
+      <div>
+      <span>Please refresh app! Something went wrong because of error(s):</span>
+      <ol>
+          {map    ? null :  ( <li>ERROR: There was a problem with loading Google Maps!</li>)}
+          {wiki   ? null :  ( <li>ERROR: There was a problem with fetching data from Wikipedia!</li>)}
+          {flickr ? null :  ( <li>ERROR: There was a problem with fetching images from Flickr!</li>)}
+      </ol>
+      </div>
+    )
+  }
 
 
 
   render () {
 
-    const { panel, locations, marker, openInfoWindow, closeInfoWindow, infoWindow, modal, closeModal, openModal } = this.props
+    const { panel, locations, marker, closeInfoWindow, infoWindow, modal, closeModal, openModal, isLoaded } = this.props
 
     return (
       <main
+        id="map"
         className={`panel-${panel ? 'show' : 'hidden'}`}>
 
         <DetailsPage
-          panel={panel}
           marker={marker}
-          locations={locations}
           modal={modal}
           closeModal={closeModal}
         />
@@ -92,6 +96,16 @@ class Map extends Component {
         )}
 
         </GoogleMapReact>
+
+        {/* Error handling notification message */}
+        {isLoaded.map
+          && isLoaded.wiki
+          && isLoaded.flickr ? null
+                             : (
+                               <div className="error">
+                                 {this.drawError(isLoaded.map, isLoaded.wiki, isLoaded.flickr)}
+                               </div>
+                               )}
 
       </main>
     );

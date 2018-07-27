@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+
 import './DetailsPage.css'
 
 
@@ -8,7 +8,7 @@ import './DetailsPage.css'
 class DetailsPage extends Component {
 
   render () {
-    const { panel, marker, location, modal, closeModal } = this.props;
+    const { marker, modal, closeModal } = this.props;
 
     let latitude  = `${marker.position ? marker.position.lat.toFixed(4).toString() : undefined}`;
     let longitude = `${marker.position ? marker.position.lng.toFixed(4).toString() : undefined}`;

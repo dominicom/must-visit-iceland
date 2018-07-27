@@ -43,13 +43,19 @@
         "elementType": "all",
         "stylers": [
             {
-                "color": "#f2f2f2"
-            },
-            {
                 "visibility": "off"
             },
             {
                 "lightness": "0"
+            },
+            {
+                "saturation": "-75"
+            },
+            {
+                "gamma": "1.00"
+            },
+            {
+                "hue": "#ff0000"
             }
         ]
     },

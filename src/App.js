@@ -7,11 +7,8 @@ import SidePanel from './components/SidePanel';
 
 import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
-//import * as key from './data.credentials';
 
 import './App.css';
-//import './styles/responsive.css';
-//import './styles/animations.css';
 
 
 
@@ -28,7 +25,12 @@ class App extends Component {
       lat: 64.85,
       lng: -18.45
     },
-    zoom: 7
+    zoom: 7,
+    isLoaded: {
+      map: true,
+      wiki: true,
+      flickr: true
+    }
   }
 
 
@@ -84,8 +86,17 @@ class App extends Component {
         let pics = [];
         fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
           .then(res => {
-            //console.log(res);
-            return res.json()})
+            if (!res.ok) {
+              // Updating state and specify error
+              let issue = this.state.isLoaded;
+              issue['flickr'] = false;
+
+              this.setState({ issue })
+            }
+
+            return res.json();
+
+          })
           .then(data => {
             let picArray = data.photos.photo.map(pic => {
 
@@ -96,7 +107,7 @@ class App extends Component {
 
            // Pushing temporary pictures data of one location to an Array
            pics.push(...picArray);
-            //console.log(query, pics)
+
          })
 
          // Pushing all pictures results of all locations to an Array
@@ -104,9 +115,7 @@ class App extends Component {
       }
 
       // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
-      //let query = `${l.title}`;
-
-      let photos = getPhotos(l.title);
+      getPhotos(l.title);
 
 
       // Wiki get data function
@@ -125,17 +134,20 @@ class App extends Component {
           })
           .catch(error => {
 
-            console.log(error);
+            // Push specific message to <DetailsPage/> of each location item
             let content = `<p>Sorry, there is an error loading information about ${query}. Find out some information on Wikipedia by clicking <a href="https://en.wikipedia.org/wiki/${query}" target="_blank">here</a>.</p>`;
             infoData.push(content);
 
+            // Updating state and specify error
+            let issue = this.state.isLoaded;
+            issue['wiki'] = false;
+
+            this.setState({ issue })
+
           })
       }
-
-
-
       // Making a request by 'title' variable as a query word of each location as presented in DB from JSON
-      let info = getWikiData(l.title);
+      getWikiData(l.title);
 
       // Pushing all pictures to 'location' Array to 'photos' variable of each location
       l['photos'] = photoUrlData[0] // [0] - because results are as Array in Array, it needs to "destruct" :)
@@ -163,14 +175,12 @@ class App extends Component {
   }
 
 
-
   // Open and Close <InfoWindow/> Component
   openInfoWindow = (marker) => {
     this.setState({ selectedMarker: marker, infoWindow: true })
   }
   closeInfoWindow = () => {
     this.setState({ selectedMarker: [], infoWindow: false })
-    console.log(this.state.infoWindow)
   }
 
   // Open and Close <DetailsPage/> Component
@@ -185,11 +195,8 @@ class App extends Component {
 
 
 
-
-
-
   render() {
-    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal } = this.state
+    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal, isLoaded } = this.state
 
     return (
 
@@ -207,6 +214,7 @@ class App extends Component {
           modal={modal}
           openModal={this.openModal}
         />
+
         <Map
           style={MapTheme}
           center={center}
@@ -215,12 +223,12 @@ class App extends Component {
           locations={locations}
           eventHandler={this.centerMap}
           marker={selectedMarker}
-          openInfoWindow={this.openInfoWindow}
           closeInfoWindow={this.closeInfoWindow}
           infoWindow={infoWindow}
           modal={modal}
           closeModal={this.closeModal}
           openModal={this.openModal}
+          isLoaded={isLoaded}
         />
 
       </div>

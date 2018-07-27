@@ -79,3 +79,31 @@ main.panel-show {
 .details-button:active {
   background-color: #06a;
 }
+
+
+
+
+/* ERROR message */
+
+.error {
+  position: absolute;
+  top: 62px;
+  left: 0;
+  width: 100%;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8em;
+  background-color: #fd0;
+  text-align: left;
+  padding: 1em;
+}
+.error span {
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-decoration-color: #fff;
+}
+.error ol {
+  margin: 0;
+}
+.error li {
+  list-style: decimal;
+}

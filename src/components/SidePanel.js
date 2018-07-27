@@ -15,7 +15,6 @@ class SidePanel extends Component {
 
   state = {
     query: '',
-    details: false
   }
 
   handleClick() {
@@ -31,7 +30,7 @@ class SidePanel extends Component {
 
   render () {
     const { toggle, panel, locations, eventHandler, openModal } = this.props
-    const { query, details } = this.state
+    const { query } = this.state
 
     return (
       <aside className={`side-panel ${panel ? 'show' : 'hidden'}`}>
@@ -65,6 +64,9 @@ class SidePanel extends Component {
                 panel={panel}
               />
             ))}
+            {locations.length === 0 && (
+              <p className="message">No results</p>
+            )}
         </div>
       </aside>
     );
