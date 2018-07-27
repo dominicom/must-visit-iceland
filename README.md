@@ -1,6 +1,6 @@
 # Must Visit Iceland
 
-**Neighbour Map** — original project name customized into personal graphics theme.
+**Neighborhood Map** — original project name customized into personal graphics theme.
 
 Student Project #8 (Final) during Google Front-End Development Nanodegree Program at Udacity made with React.
 
@@ -62,7 +62,8 @@ To get started:
 
 ## About the project
 
-Lorem Ipsum
+**Must Visit Iceland** is the Neighborhood Map application, final project at Udacity and Google Scholarship program at FEND Track.
+Google Maps component is used for displaying a list of places worth to visit in Iceland - the beautiful _country of ice and fire_.
 
 #### Graphics and design resources
 

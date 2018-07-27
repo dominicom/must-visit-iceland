@@ -58,6 +58,10 @@ class DetailsPage extends Component {
 
         <article className="facts" tabIndex="0">
           <div className="content" dangerouslySetInnerHTML={{__html: marker.info }}></div>
+          <div className="data-link">
+            <span>Powered by Wikipedia</span>
+            <a href={`https://en.wikipedia.org/wiki/${marker.title}`} target="_blank">Source</a>  
+          </div>
         </article>
 
 
@@ -80,7 +84,12 @@ class DetailsPage extends Component {
         </section>
 
       ) : (
-        <span>No location selected or information loaded</span>
+        <div className="location-detail-page error">
+         <span>Slow network or you are offline</span>
+         <p>No information loaded. Please refresh App!</p>
+         <button className="close"
+                 onClick={(event) => closeModal()}>Close</button>
+       </div>
       )}
 
       </div>

@@ -20,7 +20,7 @@ class Map extends Component {
     this.props.eventHandler(location, pos)
   }
 
-
+  // This function draws error message window below header when some data are not loaded
   drawError = (map, wiki, flickr) => {
     return (
       <div>
@@ -33,6 +33,7 @@ class Map extends Component {
       </div>
     )
   }
+
 
 
 
@@ -98,14 +99,13 @@ class Map extends Component {
         </GoogleMapReact>
 
         {/* Error handling notification message */}
-        {isLoaded.map
-          && isLoaded.wiki
-          && isLoaded.flickr ? null
-                             : (
-                               <div className="error">
-                                 {this.drawError(isLoaded.map, isLoaded.wiki, isLoaded.flickr)}
-                               </div>
-                               )}
+        {isLoaded.map && isLoaded.wiki && isLoaded.flickr
+          ? null
+          : (
+              <div className="error">
+                {this.drawError(isLoaded.map, isLoaded.wiki, isLoaded.flickr)}
+              </div>
+          )}
 
       </main>
     );

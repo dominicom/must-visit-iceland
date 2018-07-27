@@ -22,7 +22,9 @@
 .location-detail-page {
   position: relative;
   background-color: #fff;
-  height: calc(100vh - 120px);
+
+  /* TODO */
+  /* height: calc(100vh - 120px); */
   transition: 0.3s;
   margin: 60px auto 0 auto;
   border-radius: 5px;
@@ -64,6 +66,28 @@
   color: #06a;
 }
 
+/*
+/*   ARTICLES Content
+*/
+.photos-gallery,
+.photos-link,
+.data-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.photos-link,
+.data-link {
+  font-size: 0.7em;
+}
+.photos-link a,
+.data-link a {
+  color: #06a;
+}
+
 /* PHOTOS article */
 
 .location-detail-page .photos {
@@ -71,18 +95,6 @@
   text-align: left;
 }
 
-
-.photos-gallery,
-.photos-link {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: flex-start;
-  align-items: flex-start;
-}
-.photos-link {
-  justify-content: space-between;
-}
 .photos-gallery {
   padding-left: 0;
   margin: 0 0 1em;
@@ -106,15 +118,6 @@
   background-size: cover;
 }
 
-
-.photos-link {
-  font-size: 0.7em;
-}
-.photos-link a {
-  color: #06a;
-}
-
-
 /* FACTS article */
 
 .location-detail-page .facts {
@@ -130,7 +133,10 @@
 .facts .content {
   font-size: 0.8em;
 }
-
+.data-link {
+  margin: 0 0 1em;
+  font-weight: 400;
+}
 
 /* POSITION GPS article */
 
@@ -198,6 +204,10 @@
     height: 100vh;
     margin: 0;
   }
+  .location-detail-page.error {
+    max-width: 100%;
+    /* height: auto; */
+  }
   .photos-gallery {
     justify-content: flex-start;
   }
@@ -207,4 +217,13 @@
     width: 24px;
     height: 24px;
   }
+}
+
+/* ERROR page */
+
+.location-detail-page.error {
+  position: relative;
+  margin: 30% auto;
+  max-width: 600px;
+  height: auto;
 }
