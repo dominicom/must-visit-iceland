@@ -29,14 +29,6 @@ class Item extends Component {
   }
 
 
-  // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
-  onFocus = () => {
-    setTimeout(() => {
-      let element = document.querySelector('.location-detail-page')
-      element.focus()
-    }, 500);
-  }
-
   render () {
     const { location, openModal, panel } = this.props
     const { isToggleOn } = this.state

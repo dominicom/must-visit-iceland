@@ -83,31 +83,22 @@ class App extends Component {
         let num = 4;
         let pics = [];
         fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${FLICKR_KEY}&tags=${query}&per_page=${num}&page=1&format=json&nojsoncallback=1`)
-          .then(res => {
-            if (!res.ok) {
-              // Updating state and specify error
-              let issue = this.state.isLoaded;
-              issue['flickr'] = false;
-
-              this.setState({ issue })
-            }
-
-            return res.json();
-
-          })
+          .then(res => res.json())
           .then(data => {
             let picArray = data.photos.photo.map(pic => {
 
-                 let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
-                 return src;
+              let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
+              return src;
+            })
+            pics.push(...picArray);
+          })
+          .catch(error => {
+            // Updating state and specify error
+            let issue = this.state.isLoaded;
+            issue['flickr'] = false;
 
-           })
-
-           // Pushing temporary pictures data of one location to an Array
-           pics.push(...picArray);
-
-         })
-
+            this.setState({ issue })
+          })
          // Pushing all pictures results of all locations to an Array
          photoUrlData.push(pics);
       }
@@ -115,7 +106,7 @@ class App extends Component {
       // Wiki get data function
       let infoData = [];
 
-      let getWikiData = (query) => {
+      let getWikiData = (query) => {    // format
 
         fetch(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&titles=${query.replace(/ /g, '_')}&exintro=1`)
           .then(res => {
@@ -195,6 +186,15 @@ class App extends Component {
       }
     }, 3000);
   }
+
+
+
+
+
+
+
+
+
 
 
   render() {
