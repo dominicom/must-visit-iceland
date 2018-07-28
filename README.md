@@ -60,6 +60,8 @@ To get started:
 * start the development server with `npm start`
 * with your server running, visit the site: `http://localhost:3000` if not open automatically
 
+Please note that the service worker is only implemented during production build. To check it run `npm run serve` and then visit `localhost:5000`.
+
 ## About the project
 
 **Must Visit Iceland** is the Neighborhood Map application, final project at Udacity and Google Scholarship program at FEND Track.
