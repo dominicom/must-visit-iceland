@@ -67,7 +67,7 @@ class App extends Component {
   updateLocations = () => {
     // Pushing locations and initial data from local JSON to an Array - './data/locations.json'
     let locations = [];
-    locations.push(...data)
+    locations.push(...data);
 
     // This function gets photos from Flickr and Wiki Data
     // Next it merges to existing locations data in Array
@@ -137,12 +137,16 @@ class App extends Component {
       // Pushing all pictures to 'location' Array to 'photos' variable of each location
       l['photos'] = photoUrlData[0] // [0] - because results are as Array in Array, it needs to "destruct" :)
       l['info'] = infoData;
-    })
 
+      return locations;
+    });
+    
     // Setting merged locations data to the state
     this.setState({ locations: locations });
     console.log(locations)
   }
+
+
 
   // Open and close <SidePanel/> function
   toggleSidePanel = (panel) => {
