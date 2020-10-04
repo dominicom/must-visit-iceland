@@ -24,8 +24,8 @@ class SidePanel extends Component {
   }
 
   queryHandler = (query) => {
-    this.setState({ query: query })
-    this.props.filterLocations(query)
+    this.setState({ query: query });
+    this.props.filterLocations(query);
   }
 
   render () {

@@ -1,16 +1,18 @@
 {
   "homepage": "https://dominicom.github.io/must-visit-iceland",
   "name": "must-visit-iceland",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
     "gh-pages": "^1.2.0",
-    "google-map-react": "^1.0.5",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-debounce-input": "^3.2.0",
-    "react-dom": "^16.4.1",
+    "google-map-react": "^1.1.7",
+    "leaflet": "^1.7.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-debounce-input": "^3.2.2",
+    "react-dom": "^16.13.1",
+    "react-leaflet": "^2.7.0",
     "react-scripts": "1.1.4"
   },
   "devDependencies": {

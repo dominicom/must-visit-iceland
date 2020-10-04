@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 
-import Marker from './Marker'
-import InfoWindow from './InfoWindow'
-import DetailsPage from './DetailsPage'
+import { Map, ZoomControl, Tooltip, TileLayer, Marker, Popup } from 'react-leaflet';
+// import L from 'leaflet'
 
+// import Marker from './Marker';
+import InfoWindow from './InfoWindow';
+import DetailsPage from './DetailsPage';
 
-class Map extends Component {
+import './Map.css';
+
+// https://github.com/rakunn/neighborhood-map
+// @live https://rakunn.github.io/neighborhood-map/
+
+class MainContainer extends Component {
   static propTypes = {
     panel: PropTypes.bool.isRequired,
     locations: PropTypes.array.isRequired,
@@ -16,7 +23,7 @@ class Map extends Component {
 
 
   eventHandler = (location, pos) => {
-    this.setState({ marker: location });
+    // this.setState({ marker: location });
     this.props.eventHandler(location, pos)
   }
 
@@ -41,75 +48,74 @@ class Map extends Component {
 
     const { panel, locations, marker, closeInfoWindow, infoWindow, modal, closeModal, openModal, isLoaded } = this.props
 
+    console.log(infoWindow, modal)
+
     return (
       <main
         id="map"
         className={`panel-${panel ? 'show' : 'hidden'}`}>
 
-        <DetailsPage
-          marker={marker}
-          modal={modal}
-          closeModal={closeModal}
-        />
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: 'AIzaSyDwEALhx2jYlIf__h8kulneoYOP5_F0evw',
-            languages: ['en', 'is'],
-            region: 'is'
-            // TODO add something extra???
-          }}
-          options={{ styles: this.props.style,
-                     scrollwheel: true
-          }}
-          center={this.props.center}
-          zoom={this.props.zoom}
-          tabIndex={panel ? 0 : -1}
-          role="application"
-        >
-
-        {/* Populate Markers */}
-        {locations.map(location => (
-          <Marker
-            key={location.id}
-            lat={location.position.lat}
-            lng={location.position.lng}
-            name={location.name}
-            location={location}
-            eventHandler={this.eventHandler}
+        {modal && (
+          <DetailsPage
             marker={marker}
-            panel={panel}
+            modal={modal}
+            closeModal={closeModal}
           />
-        ))}
+        )}  
+
+        <Map 
+          zoomControl={false}
+          attributionControl={false}
+          style={{ height: `100%` }}
+          viewport={{
+            center: this.props.center,
+            zoom: this.props.zoom
+          }}
+          onClick={() => console.log("klołs eny popap!")}
+        >
+          <ZoomControl position="topright" />
+          <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
 
 
+          {locations.map(location => (
+              <Marker
+                key={location.id}
+                position={[location.position.lat, location.position.lng]}
+                name={location.name}
+                location={location}
+                marker={marker}
+                panel={panel}
+                onClick={() => this.eventHandler(location, location.position)}
+              >
+                <Tooltip>{location.name}</Tooltip>
+              </Marker>
+          ))}
 
-        {/* InfoWindow appears when marker is clicked and disapears after filter results */}
-        {marker.length !== 0 && infoWindow && (
-          <InfoWindow
-            info={marker}
-            lat={marker.position.lat}
-            lng={marker.position.lng}
-            eventHandler={this.eventHandler}
-            closeInfoWindow={closeInfoWindow}
-            openModal={openModal}
-          />
+          {marker.length !== 0 && infoWindow && (
+            <InfoWindow
+              info={marker}
+              position={[marker.position.lat, marker.position.lng]}
+              eventHandler={this.eventHandler}
+              closeInfoWindow={closeInfoWindow}
+              openModal={openModal}
+            />
+          )}
+        </Map>
 
-        )}
-
-        </GoogleMapReact>
 
         {/* Error handling notification message */}
-        {isLoaded.map && isLoaded.wiki && isLoaded.flickr
+
+        {/* {isLoaded.map && isLoaded.wiki && isLoaded.flickr
           ? null
           : (
               <div className="error">
                 {this.drawError(isLoaded.map, isLoaded.wiki, isLoaded.flickr)}
               </div>
-          )}
+          )} */}
 
       </main>
     );
   }
 }
 
-export default Map;
+export default MainContainer;

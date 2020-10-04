@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Flag from '../icons/flag.svg';
 
+import './Header.css';
+
 class Header extends Component {
   render () {
     return (

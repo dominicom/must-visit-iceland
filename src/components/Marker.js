@@ -17,7 +17,7 @@ const Marker = (props) => {
              width={48}
              height={64}
              alt={`Marker of location ${props.location.altname ? props.location.altname : props.location.title}`}
-             onClick={(event) => props.eventHandler(props.location, props.location.position)}
+             onClick={() => props.eventHandler(props.location, props.location.position)}
              tabIndex={props.panel ? -1 : 0}
         />
       </div>

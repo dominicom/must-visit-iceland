@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { Popup } from 'react-leaflet';
 import * as FocusTrap from '../utils/FocusTrap';
 
 import './InfoWindow.css';
@@ -7,28 +9,33 @@ import './InfoWindow.css';
 
 
 
-const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal }) => {
-
+const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal, position }) => {
+    console.log("InfoWindow, marker:", info, infoWindow);
     return (
-      <div id="talkbubble" className="info-window">
+      <Popup position={position} onClose={() => closeInfoWindow()}>
 
-        <h2>{info.name}</h2>
+      
+        {/* <div id="talkbubble" className="info-window"> */}
+          
 
-        <h3>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h3>
+          <h2>{info.name}</h2>
 
-
-        <button className="details-button"
-                onClick={(event) => {
-                  openModal();
-                  FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
-                }}>Details</button>
+          <h3>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h3>
 
 
-        <button className="close"
-                onClick={(event) => closeInfoWindow()}>Close</button>
+          <button className="details-button"
+                  onClick={() => {
+                    openModal();
+                    FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
+                  }}>Details</button>
 
-        <div id="triangle"></div>
-      </div>
+
+          {/* <button className="close" onClick={(event) => closeInfoWindow()}>Close</button> */}
+
+          {/* <div id="triangle"></div> */}
+          
+        {/* </div> */}
+      </Popup>
     );
   }
 

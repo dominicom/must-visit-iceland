@@ -4,8 +4,8 @@ import * as FocusTrap from '../utils/FocusTrap';
 import './Item.css';
 
 class Item extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       isToggleOn: false
     };

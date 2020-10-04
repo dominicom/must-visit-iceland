@@ -1,0 +1,6 @@
+.leaflet-container {
+  height: calc(100vh - 3rem);
+  width: 100%;
+  z-index: 0;
+  background-color: #171717;
+}

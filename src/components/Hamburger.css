@@ -1,6 +1,6 @@
 .hamburger {
   position: absolute;
-  fill: #999;
+  fill: var(--dark-gray-color);
   right: 300px;
   top: 0;
   overflow: hidden;

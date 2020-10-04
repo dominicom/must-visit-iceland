@@ -26,6 +26,7 @@ class App extends Component {
       lng: -18.45
     },
     zoom: 7,
+    isDisconnected: false,
     isLoaded: {
       map: true,
       wiki: true,
@@ -37,6 +38,40 @@ class App extends Component {
   componentDidMount () {
     this.updateLocations();
     this.mapsLoaded();
+    this.handleConnectionChange();
+    window.addEventListener('online', this.handleConnectionChange);
+    window.addEventListener('offline', this.handleConnectionChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('online', this.handleConnectionChange);
+    window.removeEventListener('offline', this.handleConnectionChange);
+  }
+  
+  // Change on online/offline detection
+  // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn
+  handleConnectionChange = () => {
+    const condition = navigator.onLine ? 'online' : 'offline';
+    if (condition === 'online') {
+      const webPing = setInterval(
+        () => {
+          fetch('//google.com', {
+            mode: 'no-cors',
+            })
+          .then(() => {
+            this.setState({ isDisconnected: false }, () => {
+              return clearInterval(webPing)
+            });
+          })
+          .catch(() => {
+            this.setState({ isDisconnected: true }, () => console.error("You are offline!"))
+          })
+
+        }, 2000);
+      return;
+    }
+
+    return this.setState({ isDisconnected: true });
   }
 
   filterLocations = (query) => {
@@ -179,6 +214,8 @@ class App extends Component {
 
   // Checking if map frame loaded correctly as requested
   // If not then updating state isLoaded.map to false
+
+  
   mapsLoaded = () => {
     setTimeout(() => {
       const mapContent = document.querySelector('iframe');

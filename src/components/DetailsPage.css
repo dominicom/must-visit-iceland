@@ -5,6 +5,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 99;
+  /* TO-DO */
   background-color: rgb(0, 0, 0, 0.5)
 }
 .modal.opened {
@@ -21,7 +22,7 @@
 */
 .location-detail-page {
   position: relative;
-  background-color: #fff;
+  background-color: var(--white-color);
 
   /* TODO */
   /* height: calc(100vh - 120px); */
@@ -63,7 +64,7 @@
   margin: 0;
   font-size: 1.2em;
   font-weight: 400;
-  color: #06a;
+  color: var(--primary-color);
 }
 
 /*
@@ -85,7 +86,7 @@
 }
 .photos-link a,
 .data-link a {
-  color: #06a;
+  color: var(--primary-color);
 }
 
 /* PHOTOS article */
@@ -126,8 +127,8 @@
   max-height: 200px;
   overflow-y: auto;
   background-color: #f1f1f1;
-  border-top: 1px solid #999;
-  border-bottom: 1px solid #999;
+  border-top: 1px solid var(--dark-gray-color);
+  border-bottom: 1px solid var(--dark-gray-color);
 }
 
 .facts .content {
@@ -145,7 +146,7 @@
   flex-wrap: wrap;
   font-size: 0.75em;
   font-weight: 400;
-  color: #999;
+  color: var(--dark-gray-color);
   justify-content: flex-start;
   align-items: flex-end;
   align-content: flex-start;
@@ -164,7 +165,7 @@
 
 .location-detail-page .position span {
   font-family: 'Roboto Mono', monospace;
-  color: #06a;
+  color: var(--primary-color);
 }
 
 

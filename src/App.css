@@ -1,51 +1,23 @@
-* {
+/* * {
   outline: none;
-}
+} */
+
 body {
   overflow: hidden;
 }
+
 header,
 main {
   display: flex;
   flex-wrap: nowrap;
 }
+
 .app {
   text-align: center;
   position: relative;
 }
 
-
-
-/* HEADER COMPONENT */
-
-.logo {
-  height: 62px;
-  width: 100%;
-  background-color: #fff;
-  border-bottom: 2px solid #999;
-  display: flex;
-  flex-wrap: nowrap;
-}
-.flag {
-  width: 50px;
-  height: 36px;
-  margin: auto 1em;
-}
-.slogan {
-  margin: auto 1em auto 0;
-  padding: 0;
-  color: #06a;
-  font-size: 1.2em;
-  font-weight: 400;
-}
-@media screen and (max-width: 360px) {
-  .slogan {
-    display: none;
-  }
-}
-
-
-/* MAP COMPONENT */
+/* MAIN CONTAINER */
 
 main {
   height: calc(100vh - 62px);
