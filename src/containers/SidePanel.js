@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 
-import Hamburger from './Hamburger';
-import Item from './Item'
+import Hamburger from '../components/Hamburger';
+import Item from '../components/Item'
 
 import './SidePanel.css';
 

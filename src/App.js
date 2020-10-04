@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 
-import Header from './components/Header.js';
-import Map from './components/Map';
-import SidePanel from './components/SidePanel';
+import Header from './containers/Header.js';
+import Main from './containers/Main';
+import SidePanel from './containers/SidePanel';
 
 import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
@@ -47,7 +47,7 @@ class App extends Component {
     window.removeEventListener('online', this.handleConnectionChange);
     window.removeEventListener('offline', this.handleConnectionChange);
   }
-  
+
   // Change on online/offline detection
   // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn
   handleConnectionChange = () => {
@@ -245,6 +245,7 @@ class App extends Component {
 
       <div className="app">
         <Header />
+
         <SidePanel
           toggle={this.toggleSidePanel}
           panel={panel}
@@ -258,7 +259,7 @@ class App extends Component {
           openModal={this.openModal}
         />
 
-        <Map
+        <Main
           style={MapTheme}
           center={center}
           zoom={zoom}

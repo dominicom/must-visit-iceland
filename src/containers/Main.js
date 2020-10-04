@@ -1,15 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import GoogleMapReact from 'google-map-react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Map, ZoomControl, Tooltip, TileLayer, Marker, Popup } from 'react-leaflet';
 // import L from 'leaflet'
 
 // import Marker from './Marker';
-import InfoWindow from './InfoWindow';
+import InfoWindow from '../components/InfoWindow';
 import DetailsPage from './DetailsPage';
 
-import './Map.css';
+import './Main.css';
 
 // https://github.com/rakunn/neighborhood-map
 // @live https://rakunn.github.io/neighborhood-map/
@@ -66,29 +65,33 @@ class MainContainer extends Component {
         <Map 
           zoomControl={false}
           attributionControl={false}
-          style={{ height: `100%` }}
-          viewport={{
-            center: this.props.center,
-            zoom: this.props.zoom
-          }}
-          onClick={() => console.log("klołs eny popap!")}
+          // style={{ height: `100%` }}
+          center={this.props.center}
+          // viewport={{
+          //   center: this.props.center,
+          //   zoom: this.props.zoom
+          // }}
+          scrollWheelZoom={infoWindow ? "center" : "true"}
+          zoom={this.props.zoom}
         >
+          
           <ZoomControl position="topright" />
+
           <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
 
 
           {locations.map(location => (
-              <Marker
-                key={location.id}
-                position={[location.position.lat, location.position.lng]}
-                name={location.name}
-                location={location}
-                marker={marker}
-                panel={panel}
-                onClick={() => this.eventHandler(location, location.position)}
-              >
-                <Tooltip>{location.name}</Tooltip>
-              </Marker>
+            <Marker
+              key={location.id}
+              position={[location.position.lat, location.position.lng]}
+              name={location.name}
+              location={location}
+              marker={marker}
+              panel={panel}
+              onClick={() => this.eventHandler(location, location.position)}
+            >
+              {marker.id !== location.id && <Tooltip direction="right">{location.name}</Tooltip>}
+            </Marker>
           ))}
 
           {marker.length !== 0 && infoWindow && (

@@ -7,20 +7,28 @@ import './InfoWindow.css';
 
 
 
+const overrideStyle = {
+  popup: {
+    bottom: 10
+  }
+}
 
 
 const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal, position }) => {
     console.log("InfoWindow, marker:", info, infoWindow);
     return (
-      <Popup position={position} onClose={() => closeInfoWindow()}>
+      <Popup 
+        minWidth={400}
+        position={position} 
+        offset={[0, -30]}
+        onClose={() => closeInfoWindow()}
+      >
 
       
         {/* <div id="talkbubble" className="info-window"> */}
           
-
+          <h4>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h4>
           <h2>{info.name}</h2>
-
-          <h3>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h3>
 
 
           <button className="details-button"

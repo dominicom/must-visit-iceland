@@ -6,7 +6,7 @@ const Hamburger = ({ toggle, state }) => {
     return (
       <nav tabIndex="0" aria-label="Open or Close filter and list of locations"
         className="hamburger"
-        onClick={(event) => toggle(state)}
+        onClick={() => toggle(state)}
         style={{
           backgroundColor: '#fff',
           width: 60,
