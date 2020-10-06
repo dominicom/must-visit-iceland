@@ -6,12 +6,6 @@ import ReactMapboxGl, {
   ScaleControl 
 } from 'react-mapbox-gl';
 
-import Pin from '../icons/pin.svg';
-
-// import { Map, ZoomControl, Tooltip, TileLayer, Marker, Popup } from 'react-leaflet';
-// import L from 'leaflet'
-
-// import Marker from './Marker';
 import LocationMarker from '../components/LocationMarker';
 import InfoWindow from '../components/InfoWindow';
 import DetailsPage from './DetailsPage';
@@ -23,6 +17,7 @@ import './Main.css';
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ',
+  attributionControl: false,
 });
 
 class MainContainer extends Component {
@@ -108,9 +103,7 @@ class MainContainer extends Component {
 
         <Map 
           // zoomControl={false}
-          // attributionControl={false}
-          // {...this.state.viewport}
-          // style="mapbox://styles/mapbox/streets-v9"
+          
           containerStyle={{ width: '100%', height: '100%' }}
           style="mapbox://styles/mapbox/streets-v8"
           // style={{ height: `100%` }}

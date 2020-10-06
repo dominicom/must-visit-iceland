@@ -1,0 +1,8 @@
+.marker {
+  width: 48px;
+  height: 64px;
+  cursor: pointer;
+}
+.marker:focus {
+  outline: none;
+}

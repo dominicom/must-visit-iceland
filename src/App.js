@@ -182,10 +182,8 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
-    console.log("skurw", [ pos[1], pos[0] ])
     this.setState({ center: { lat: pos[1], lng: pos[0] } }, () => console.log(this.state.center));
-    // this.openInfoWindow(location);
-    console.log("co my tu mamy", location, pos)
+    this.openInfoWindow(location);
   }
 
   // Open and Close <InfoWindow/> Component

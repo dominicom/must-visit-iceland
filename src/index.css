@@ -1,5 +1,8 @@
 :root {
   --primary-color: #06a;
+  --primary-color-darker: #004d80;
+  --accent-color: #e1002c;
+  --accent-color-darker: #b0002c;
   --white-color: #fff;
   --warn-color: #fd0;
   --black-color: #000;
@@ -7,8 +10,11 @@
   --theme-color: #eaeaea;
 }
 
+
+
 html {
   box-sizing: border-box;
+  font-size: 16px;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -18,9 +24,7 @@ body {
   padding: 0;
   background-color: #f1f1f1;
   font-family: 'Roboto', sans-serif;
-  /* font-size: 62.5%; */
   font-size: 100%;
-  /* font-size: 10px; */
 }
 ul, li {
   list-style: none;

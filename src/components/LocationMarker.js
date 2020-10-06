@@ -3,26 +3,29 @@ import PropTypes from 'prop-types';
 
 import { Marker } from 'react-mapbox-gl'; 
 
-import Pin from '../icons/pin.svg';
+import Pin from '../icons/Pin';
 
-import './Marker.css';
+import './LocationMarker.css';
 
 const LocationMarker = (props) => {
   return (
     <Marker 
       title={props.name}
+      className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
+      title={props.name}
       coordinates={props.coordinates} 
-      anchor="bottom" 
+      anchor="bottom"
       onClick={() => props.eventHandler(props.location, props.coordinates)}
-      // className={`marker ${props.marker.id === props.location.id ? 'bounce' : 'pin'}`}>
+      tabIndex={props.panel ? -1 : 0}
     >
-      <img src={Pin}
+      <Pin />
+      {/* <img src={Pin}
           width={48}
           height={64}
           alt={`Marker of location ${props.location.altname ? props.location.altname : props.location.title}`}
           
           tabIndex={props.panel ? -1 : 0}
-        />
+        /> */}
       {/* <div
         title={props.name}
         className={`marker ${props.marker.id === props.location.id ? 'bounce' : 'pin'}`}>
