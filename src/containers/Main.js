@@ -45,7 +45,19 @@ class MainContainer extends Component {
 
   render () {
 
-    const { panel, locations, marker, closeInfoWindow, infoWindow, modal, closeModal, openModal, isLoaded } = this.props
+    const { 
+      viewport, 
+      onViewportChanged,
+      panel, 
+      locations, 
+      marker, 
+      closeInfoWindow, 
+      infoWindow, 
+      modal, 
+      closeModal, 
+      openModal, 
+      isLoaded 
+    } = this.props
 
     console.log(infoWindow, modal)
 
@@ -66,13 +78,11 @@ class MainContainer extends Component {
           zoomControl={false}
           attributionControl={false}
           // style={{ height: `100%` }}
-          center={this.props.center}
-          // viewport={{
-          //   center: this.props.center,
-          //   zoom: this.props.zoom
-          // }}
+          //center={this.props.center}
+          viewport={viewport}
+          onViewportChanged={onViewportChanged}
           scrollWheelZoom={infoWindow ? "center" : "true"}
-          zoom={this.props.zoom}
+          //zoom={this.props.zoom}
         >
           
           <ZoomControl position="topright" />

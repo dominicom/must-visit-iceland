@@ -26,6 +26,10 @@ class App extends Component {
       lng: -18.45
     },
     zoom: 7,
+    viewport: {
+      center: [64.85, -18.45],
+      zoom: 6
+    },
     isDisconnected: false,
     isLoaded: {
       map: true,
@@ -48,6 +52,10 @@ class App extends Component {
     window.removeEventListener('offline', this.handleConnectionChange);
   }
 
+
+  onViewportChanged = viewport => {
+    this.setState({ viewport: { center: viewport.center, zoom: viewport.zoom } });
+  }
   // Change on online/offline detection
   // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn
   handleConnectionChange = () => {
@@ -192,8 +200,15 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
-    this.setState({ center: pos });
+    // this.setState({ center: pos });
+    this.setState(prevState => ({
+      viewport: {
+        ...prevState.viewport,
+        center: [pos.lat, pos.lng],
+      }
+    }));
     this.openInfoWindow(location);
+    console.log("co my tu mamy za obiekt?", pos, [pos.lat, pos.lng])
   }
 
   // Open and Close <InfoWindow/> Component
@@ -239,7 +254,7 @@ class App extends Component {
 
 
   render() {
-    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal, isLoaded } = this.state
+    const { viewport, locations, panel, center, zoom, selectedMarker, infoWindow, modal, isLoaded } = this.state
 
     return (
 
@@ -260,6 +275,8 @@ class App extends Component {
         />
 
         <Main
+          viewport={viewport}
+          onViewportChanged={this.onViewportChanged}
           style={MapTheme}
           center={center}
           zoom={zoom}
