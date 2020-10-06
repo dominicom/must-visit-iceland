@@ -115,45 +115,12 @@ class MainContainer extends Component {
           marker={marker}
           viewport={viewport}
           onViewportChange={onViewportChange}
-          eventHandler={this.eventHandler}
+          eventHandler={this.props.eventHandler}
           closeInfoWindow={closeInfoWindow}
+          infoWindow={infoWindow}
           openModal={openModal}
         />
           
-          {/* <ZoomControl position="topright" />
-          <ScaleControl />
-          <RotationControl /> */}
-
-          {/* <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" /> */}
-
-{/* 
-          {locations.map(location => (
-            <LocationMarker
-              key={location.id}
-              coordinates={[location.position.lng, location.position.lat]}
-              name={location.name}
-              location={location}
-              marker={marker}
-              panel={panel}
-              eventHandler={this.props.eventHandler}
-              // onClick={() => this.eventHandler(location, location.position)}
-              
-            >
-            </LocationMarker>
-          ))}
-
-          {marker.length !== 0 && infoWindow && (
-            <InfoWindow
-              info={marker}
-              coordinates={[marker.position.lng, marker.position.lat]}
-              eventHandler={this.eventHandler}
-              closeInfoWindow={closeInfoWindow}
-              openModal={openModal}
-            />
-          )} */}
-
-
-
         {/* Error handling notification message */}
 
         {isError.connection && isError.wiki && isError.flickr && (

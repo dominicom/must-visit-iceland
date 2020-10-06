@@ -1,9 +1,9 @@
 import React from 'react';
 import './Pin.css';
 
-const Pin = () => {
+const Pin = ({ onClick }) => {
   return(
-    <div className="pin">
+    <div className="pin" onClick={onClick}>
       <svg
         className="pin-shadow"
         xmlns="http://www.w3.org/2000/svg" 

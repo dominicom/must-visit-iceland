@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Popup, Image } from 'react-mapbox-gl';
+import { Popup } from 'react-map-gl';
 // import { Popup } from 'react-leaflet';
 import * as FocusTrap from '../utils/FocusTrap';
 
@@ -15,13 +15,19 @@ const overrideStyle = {
 }
 
 
-const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal, coordinates }) => {
+const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coordinates }) => {
     console.log("InfoWindow, marker:", info, infoWindow);
     return (
       <Popup 
-        minWidth={400}
-        coordinates={coordinates} 
-        offset={[0, -45]}
+        // minWidth={400}
+        // coordinates={coordinates}
+        tipSize={16}
+        anchor="top"
+        longitude={marker.position.lng}
+        latitude={marker.position.lat}
+        // closeOnClick={false}
+        // onClose={() => this.setState({popupInfo: null})} 
+        // offset={[0, -45]}
         onClose={() => closeInfoWindow()}
       >
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { ScaleControl, NavigationControl, Popup } from 'react-map-gl';
 
 import LocationMarker from './LocationMarker';
 import InfoWindow from './InfoWindow';
@@ -17,9 +17,13 @@ class Map extends Component {
     settings: {
       width: '100%',
       height: '100%',
-      mapStyle: 'mapbox://styles/mapbox/outdoors-v11'
+      mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
+      hillshading: true,
+      rasterLayer: false,
+      attributionControl: false
     }
   };
+
 
   render() {
     const { settings } = this.state;
@@ -36,20 +40,25 @@ class Map extends Component {
       modal, 
       closeModal, 
       openModal, 
-      isError 
     } = this.props
+
+
+
     return (
       <ReactMapGL
-        {...this.state.viewport}
+        //{...this.state.viewport}
+        {...viewport}
         {...settings}
-        onViewportChange={(viewport) => this.setState({viewport})}
-        // onViewportChange={this.props.onViewportChange(viewport)}
+        // onViewportChange={(viewport) => this.setState({viewport})}
+        onViewportChange={this.props.onViewportChange}
         mapboxApiAccessToken={TOKEN}
       >
+        {/* <NavigationControl />
+        <ScaleControl /> */}
         {locations.map(location => (
             <LocationMarker
               key={location.id}
-              coordinates={[location.position.lng, location.position.lat]}
+              coordinates={[location.position.lat, location.position.lng]}
               name={location.name}
               location={location}
               marker={marker}
@@ -60,6 +69,17 @@ class Map extends Component {
             >
             </LocationMarker>
           ))}
+
+          {marker.length !== 0 && infoWindow && (
+            <InfoWindow
+              info={marker}
+              marker={marker}
+              coordinates={[marker.position.lng, marker.position.lat]}
+              eventHandler={this.eventHandler}
+              closeInfoWindow={closeInfoWindow}
+              openModal={openModal}
+            />
+          )}
       </ReactMapGL>
     );
   }

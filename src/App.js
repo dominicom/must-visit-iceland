@@ -51,7 +51,7 @@ class App extends Component {
     window.removeEventListener('offline', this.handleConnectionChange);
   }
 
-  onViewportChange = viewport => this.setState({viewport});
+  onViewportChange = viewport => this.setState({ viewport });
 
   // Change on online/offline detection
   // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn
@@ -190,9 +190,9 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
-    this.setState({ center: { lat: pos[1], lng: pos[0] } }, () => console.log(this.state.center));
+    // console.log("iwenthandler", pos, location)
+    this.setState({ viewport: { latitude: pos[0], longitude: pos[1], zoom: this.state.viewport.zoom } });
     this.openInfoWindow(location);
-    console.log("scentrowałeś mapę, ale po grzyba!")
   }
 
   // Open and Close <InfoWindow/> Component
@@ -215,7 +215,6 @@ class App extends Component {
   render() {
     const { 
       viewport, 
-      onViewportChange,
       locations, 
       panel, 
       center, 
@@ -249,8 +248,8 @@ class App extends Component {
           center={[ center.lng, center.lat ]}
           zoom={zoom}
           viewport={viewport}
-          onViewportChange={onViewportChange}
-          //panel={panel}
+          onViewportChange={this.onViewportChange}
+          panel={panel}
           locations={locations}
           eventHandler={this.centerMap}
           marker={selectedMarker}

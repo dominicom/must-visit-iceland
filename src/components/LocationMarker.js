@@ -11,17 +11,18 @@ const LocationMarker = (props) => {
   return (
     <Marker 
       // title={props.name}
-      // className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
+      className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
       // title={props.name}
       // coordinates={props.coordinates} 
       // anchor="bottom"
+      
       // onClick={() => props.eventHandler(props.location, props.coordinates)}
       // tabIndex={props.panel ? -1 : 0}
       latitude={props.location.position.lat} 
       longitude={props.location.position.lng}
       offsetLeft={-24} offsetTop={-64}
     >
-      <Pin />
+        <Pin onClick={() => props.eventHandler(props.location, props.coordinates)} />
       {/* <img src={Pin}
           width={48}
           height={64}
