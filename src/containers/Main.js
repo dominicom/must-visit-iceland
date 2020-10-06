@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Map, ZoomControl, Tooltip, TileLayer, Marker, Popup } from 'react-leaflet';
+import ReactMapboxGl, { 
+  ZoomControl, 
+  ScaleControl 
+} from 'react-mapbox-gl';
+
+import Pin from '../icons/pin.svg';
+
+// import { Map, ZoomControl, Tooltip, TileLayer, Marker, Popup } from 'react-leaflet';
 // import L from 'leaflet'
 
 // import Marker from './Marker';
+import LocationMarker from '../components/LocationMarker';
 import InfoWindow from '../components/InfoWindow';
 import DetailsPage from './DetailsPage';
 
@@ -13,12 +21,36 @@ import './Main.css';
 // https://github.com/rakunn/neighborhood-map
 // @live https://rakunn.github.io/neighborhood-map/
 
+const Map = ReactMapboxGl({
+  accessToken: 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ',
+});
+
 class MainContainer extends Component {
   static propTypes = {
     panel: PropTypes.bool.isRequired,
     locations: PropTypes.array.isRequired,
     eventHandler: PropTypes.func.isRequired
   }
+  constructor() {
+    super();
+    this.state = {
+      viewport: {
+        latitude: 51,
+        longitude: 0,
+        zoom: 7,
+        bearing: 0,
+        pitch: 0,
+        maxZoom: 20
+      },
+      // position: null,
+      // mapStyle: maps.streets
+    };
+  }
+
+  componentDidMount () {
+    console.log(this.props.center)
+  }
+
 
 
   eventHandler = (location, pos) => {
@@ -27,15 +59,15 @@ class MainContainer extends Component {
   }
 
   // This function draws error message window below header when some data are not loaded
-  drawError = (map, wiki, flickr) => {
+  drawError = (connection, wiki, flickr) => {
     return (
       <div>
-      <span>Please refresh app! Something went wrong because of error(s):</span>
-      <ol>
-          {map    ? null :  ( <li>ERROR: There was a problem with loading Google Maps!</li>)}
-          {wiki   ? null :  ( <li>ERROR: There was a problem with fetching data from Wikipedia!</li>)}
-          {flickr ? null :  ( <li>ERROR: There was a problem with fetching images from Flickr!</li>)}
-      </ol>
+        <span>Please refresh app! Something went wrong because of error(s):</span>
+        <ol>
+            {connection && ( <li>ERROR: You are offline!</li>)}
+            {wiki       && ( <li>ERROR: There was a problem with fetching data from Wikipedia!</li>)}
+            {flickr     && ( <li>ERROR: There was a problem with fetching images from Flickr!</li>)}
+        </ol>
       </div>
     )
   }
@@ -43,11 +75,23 @@ class MainContainer extends Component {
 
 
 
+
   render () {
 
-    const { panel, locations, marker, closeInfoWindow, infoWindow, modal, closeModal, openModal, isLoaded } = this.props
+    const { 
+      panel, 
+      center,
+      locations, 
+      marker, 
+      closeInfoWindow, 
+      infoWindow, 
+      modal, 
+      closeModal, 
+      openModal, 
+      isError 
+    } = this.props
 
-    console.log(infoWindow, modal)
+    console.log(center)
 
     return (
       <main
@@ -63,41 +107,46 @@ class MainContainer extends Component {
         )}  
 
         <Map 
-          zoomControl={false}
-          attributionControl={false}
+          // zoomControl={false}
+          // attributionControl={false}
+          // {...this.state.viewport}
+          // style="mapbox://styles/mapbox/streets-v9"
+          containerStyle={{ width: '100%', height: '100%' }}
+          style="mapbox://styles/mapbox/streets-v8"
           // style={{ height: `100%` }}
-          center={this.props.center}
-          // viewport={{
-          //   center: this.props.center,
-          //   zoom: this.props.zoom
-          // }}
-          scrollWheelZoom={infoWindow ? "center" : "true"}
-          zoom={this.props.zoom}
+          center={center}
+          // center={[this.props.center.lat, -this.props.center.lng]}
+          // viewport={this.state.viewport}
+          // scrollWheelZoom={infoWindow ? "center" : "true"}
+          zoom={[this.props.zoom]}
         >
           
           <ZoomControl position="topright" />
+          <ScaleControl />
 
-          <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+          {/* <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" /> */}
 
 
           {locations.map(location => (
-            <Marker
+            <LocationMarker
               key={location.id}
-              position={[location.position.lat, location.position.lng]}
+              coordinates={[location.position.lng, location.position.lat]}
               name={location.name}
               location={location}
               marker={marker}
               panel={panel}
-              onClick={() => this.eventHandler(location, location.position)}
+              eventHandler={this.props.eventHandler}
+              // onClick={() => this.eventHandler(location, location.position)}
+              
             >
-              {marker.id !== location.id && <Tooltip direction="right">{location.name}</Tooltip>}
-            </Marker>
+              {/* {marker.id !== location.id && <Tooltip direction="right">{location.name}</Tooltip>} */}
+            </LocationMarker>
           ))}
 
           {marker.length !== 0 && infoWindow && (
             <InfoWindow
               info={marker}
-              position={[marker.position.lat, marker.position.lng]}
+              coordinates={[marker.position.lng, marker.position.lat]}
               eventHandler={this.eventHandler}
               closeInfoWindow={closeInfoWindow}
               openModal={openModal}
@@ -108,13 +157,11 @@ class MainContainer extends Component {
 
         {/* Error handling notification message */}
 
-        {/* {isLoaded.map && isLoaded.wiki && isLoaded.flickr
-          ? null
-          : (
-              <div className="error">
-                {this.drawError(isLoaded.map, isLoaded.wiki, isLoaded.flickr)}
-              </div>
-          )} */}
+        {isError.connection && isError.wiki && isError.flickr && (
+          <div className="error">
+            {this.drawError(isError.connection, isError.wiki, isError.flickr)}
+          </div>
+        )}
 
       </main>
     );

@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Popup } from 'react-leaflet';
+import { Popup } from 'react-mapbox-gl';
+// import { Popup } from 'react-leaflet';
 import * as FocusTrap from '../utils/FocusTrap';
 
 import './InfoWindow.css';
@@ -19,7 +20,7 @@ const InfoWindow = ({ info, infoWindow, closeInfoWindow, openModal, position }) 
     return (
       <Popup 
         minWidth={400}
-        position={position} 
+        coordinates={position} 
         offset={[0, -30]}
         onClose={() => closeInfoWindow()}
       >

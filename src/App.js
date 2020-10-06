@@ -26,18 +26,16 @@ class App extends Component {
       lng: -18.45
     },
     zoom: 7,
-    isDisconnected: false,
-    isLoaded: {
-      map: true,
-      wiki: true,
-      flickr: true
+    isError: {
+      connection: false,
+      wiki: false,
+      flickr: false
     }
   }
 
 
   componentDidMount () {
     this.updateLocations();
-    this.mapsLoaded();
     this.handleConnectionChange();
     window.addEventListener('online', this.handleConnectionChange);
     window.addEventListener('offline', this.handleConnectionChange);
@@ -59,19 +57,19 @@ class App extends Component {
             mode: 'no-cors',
             })
           .then(() => {
-            this.setState({ isDisconnected: false }, () => {
+            this.setState(state => ({ isError: { ...state.isError, connection: false } }), () => {
               return clearInterval(webPing)
             });
           })
           .catch(() => {
-            this.setState({ isDisconnected: true }, () => console.error("You are offline!"))
+            this.setState(state => ({ isError: { ...state.isError, connection: true } }), () => console.error("You are offline!"))
           })
 
         }, 2000);
       return;
     }
 
-    return this.setState({ isDisconnected: true });
+    return this.setState(state => ({ isError: { ...state.isError, connection: true } }));
   }
 
   filterLocations = (query) => {
@@ -127,13 +125,7 @@ class App extends Component {
             })
             pics.push(...picArray);
           })
-          .catch(error => {
-            // Updating state and specify error
-            let issue = this.state.isLoaded;
-            issue['flickr'] = false;
-
-            this.setState({ issue })
-          })
+          .catch(() => this.setState(state => ({ isError: { ...state.isError, flickr: true } })));
          // Pushing all pictures results of all locations to an Array
          photoUrlData.push(pics);
       }
@@ -152,16 +144,14 @@ class App extends Component {
             infoData.push(content);
 
           })
-          .catch(error => {
+          .catch(() => {
 
             // Push specific message to <DetailsPage/> of each location item
             let content = `<p>Sorry, there is an error loading information about ${query}. Find out some information on Wikipedia by clicking <a href="https://en.wikipedia.org/wiki/${query}" target="_blank">here</a>.</p>`;
             infoData.push(content);
 
             // Updating state and specify error
-            let issue = this.state.isLoaded;
-            issue['wiki'] = false;
-            this.setState({ issue })
+            this.setState(state => ({ isError: { ...state.isError, wiki: true } }))
           })
 
       }
@@ -192,8 +182,10 @@ class App extends Component {
 
   // Focus view on clicked location function -> marker & list
   centerMap = (location, pos) => {
-    this.setState({ center: pos });
-    this.openInfoWindow(location);
+    console.log("skurw", [ pos[1], pos[0] ])
+    this.setState({ center: { lat: pos[1], lng: pos[0] } }, () => console.log(this.state.center));
+    // this.openInfoWindow(location);
+    console.log("co my tu mamy", location, pos)
   }
 
   // Open and Close <InfoWindow/> Component
@@ -212,34 +204,9 @@ class App extends Component {
     this.setState({ modal: false })
   }
 
-  // Checking if map frame loaded correctly as requested
-  // If not then updating state isLoaded.map to false
-
-  
-  mapsLoaded = () => {
-    setTimeout(() => {
-      const mapContent = document.querySelector('iframe');
-
-      if (!mapContent) {
-        let issue = this.state.isLoaded;
-        issue['map'] = false;
-        this.setState({ issue })
-      }
-    }, 3000);
-  }
-
-
-
-
-
-
-
-
-
-
 
   render() {
-    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal, isLoaded } = this.state
+    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal, isError } = this.state
 
     return (
 
@@ -261,7 +228,7 @@ class App extends Component {
 
         <Main
           style={MapTheme}
-          center={center}
+          center={[ center.lng, center.lat ]}
           zoom={zoom}
           panel={panel}
           locations={locations}
@@ -272,7 +239,8 @@ class App extends Component {
           modal={modal}
           closeModal={this.closeModal}
           openModal={this.openModal}
-          isLoaded={isLoaded}
+          isError={isError}
+          // isDisconnected={this.state.isDisconnected}
         />
 
       </div>
