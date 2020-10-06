@@ -17,11 +17,11 @@ class SidePanel extends Component {
     query: '',
   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
+  // handleClick = () => {
+  //   this.setState(prevState => ({
+  //     isToggleOn: !prevState.isToggleOn
+  //   }));
+  // }
 
   queryHandler = (query) => {
     this.setState({ query: query });

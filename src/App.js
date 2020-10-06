@@ -26,6 +26,11 @@ class App extends Component {
       lng: -18.45
     },
     zoom: 7,
+    viewport: {
+      latitude: 64.85,
+      longitude: -18.45,
+      zoom: 6
+    },
     isError: {
       connection: false,
       wiki: false,
@@ -45,6 +50,8 @@ class App extends Component {
     window.removeEventListener('online', this.handleConnectionChange);
     window.removeEventListener('offline', this.handleConnectionChange);
   }
+
+  onViewportChange = viewport => this.setState({viewport});
 
   // Change on online/offline detection
   // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn
@@ -120,7 +127,7 @@ class App extends Component {
           .then(data => {
             let picArray = data.photos.photo.map(pic => {
 
-              let src = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
+              let src = `http://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`;
               return src;
             })
             pics.push(...picArray);
@@ -177,6 +184,7 @@ class App extends Component {
   toggleSidePanel = (panel) => {
     panel = this.state.panel
     panel ? this.setState({ panel: false }) : this.setState({ panel: true });
+    console.log("skonsoluj mi ten klik")
   }
 
 
@@ -184,6 +192,7 @@ class App extends Component {
   centerMap = (location, pos) => {
     this.setState({ center: { lat: pos[1], lng: pos[0] } }, () => console.log(this.state.center));
     this.openInfoWindow(location);
+    console.log("scentrowałeś mapę, ale po grzyba!")
   }
 
   // Open and Close <InfoWindow/> Component
@@ -204,7 +213,18 @@ class App extends Component {
 
 
   render() {
-    const { locations, panel, center, zoom, selectedMarker, infoWindow, modal, isError } = this.state
+    const { 
+      viewport, 
+      onViewportChange,
+      locations, 
+      panel, 
+      center, 
+      zoom, 
+      selectedMarker, 
+      infoWindow, 
+      modal, 
+      isError 
+    } = this.state
 
     return (
 
@@ -228,7 +248,9 @@ class App extends Component {
           style={MapTheme}
           center={[ center.lng, center.lat ]}
           zoom={zoom}
-          panel={panel}
+          viewport={viewport}
+          onViewportChange={onViewportChange}
+          //panel={panel}
           locations={locations}
           eventHandler={this.centerMap}
           marker={selectedMarker}

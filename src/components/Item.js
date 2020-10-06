@@ -16,7 +16,8 @@ class Item extends Component {
 
   handleClick = (location, pos) => {
     if (!this.state.isToggleOn) {
-      this.props.eventHandler(location, pos);
+      // this.props.eventHandler(location, pos);
+      console.log("kliked pozyszyn", pos)
     }
 
     this.setState(prevState => ({

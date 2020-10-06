@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Marker } from 'react-mapbox-gl'; 
+import { Marker } from 'react-map-gl'; 
 
 import Pin from '../icons/Pin';
 
@@ -10,13 +10,16 @@ import './LocationMarker.css';
 const LocationMarker = (props) => {
   return (
     <Marker 
-      title={props.name}
-      className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
-      title={props.name}
-      coordinates={props.coordinates} 
-      anchor="bottom"
-      onClick={() => props.eventHandler(props.location, props.coordinates)}
-      tabIndex={props.panel ? -1 : 0}
+      // title={props.name}
+      // className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
+      // title={props.name}
+      // coordinates={props.coordinates} 
+      // anchor="bottom"
+      // onClick={() => props.eventHandler(props.location, props.coordinates)}
+      // tabIndex={props.panel ? -1 : 0}
+      latitude={props.location.position.lat} 
+      longitude={props.location.position.lng}
+      offsetLeft={-24} offsetTop={-64}
     >
       <Pin />
       {/* <img src={Pin}

@@ -24,14 +24,16 @@ main {
   transition: width 0.3s;
   outline: none;
   overflow: hidden;
+
+  /* width: 100%; */
 }
-main.panel-hidden {
+/* main.panel-hidden {
   width: 100%;
 }
 
 main.panel-show {
   width: calc(100% - 300px);
-}
+} */
 
 
 

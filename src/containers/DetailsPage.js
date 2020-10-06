@@ -33,18 +33,19 @@ class DetailsPage extends Component {
         <article className="photos">
 
           <ul className="photos-gallery">
-          {marker.photos ? marker.photos.map(photo => (
-            <li key={photo}>
-                  <a href={photo}
-                     target="_blank"
-                     aria-label={`Image of ${marker.name}`}>
-                    <div className="photo"
-                         style={{ backgroundImage: `url(${photo})` }}
-                         role="img">
-                    </div>
-                  </a>
-            </li>
-          )) : undefined}
+            {marker.photos ? marker.photos.map(photo => (
+              <li key={photo}>
+                <a href={photo}
+                  target="_blank"
+                  aria-label={`Image of ${marker.name}`}>
+                  <div className="photo"
+                    style={{ backgroundImage: `url(${photo})` }}
+                    role="img">
+                  </div>
+                </a>
+              </li>
+            )) : null}
+            {/* TO-DO: Place holder */}
           </ul>
 
 

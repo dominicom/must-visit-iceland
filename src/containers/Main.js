@@ -1,49 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import ReactMapboxGl, { 
-  ZoomControl, 
-  ScaleControl 
-} from 'react-mapbox-gl';
+import ReactMapGL from 'react-map-gl';
+// import ReactMapboxGl, { 
+//   ZoomControl, 
+//   ScaleControl,
+//   RotationControl 
+// } from 'react-mapbox-gl';
 
-import LocationMarker from '../components/LocationMarker';
-import InfoWindow from '../components/InfoWindow';
+import Map from '../components/Map';
+
 import DetailsPage from './DetailsPage';
 
 import './Main.css';
 
+
+
 // https://github.com/rakunn/neighborhood-map
 // @live https://rakunn.github.io/neighborhood-map/
 
-const Map = ReactMapboxGl({
-  accessToken: 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ',
-  attributionControl: false,
-});
+// const Map = ReactMapboxGl({
+//   accessToken: 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ',
+//   attributionControl: false,
+// });
 
 class MainContainer extends Component {
   static propTypes = {
-    panel: PropTypes.bool.isRequired,
+    // panel: PropTypes.bool.isRequired,
     locations: PropTypes.array.isRequired,
     eventHandler: PropTypes.func.isRequired
   }
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       viewport: {
-        latitude: 51,
-        longitude: 0,
-        zoom: 7,
+        latitude: 64,
+        longitude: -20,
+        zoom: 6,
         bearing: 0,
         pitch: 0,
-        maxZoom: 20
+        maxZoom: 20,
+        width: 400,
+        height: 400,
       },
-      // position: null,
-      // mapStyle: maps.streets
     };
   }
 
   componentDidMount () {
     console.log(this.props.center)
+    console.log("👌 mounted!")
   }
 
 
@@ -74,8 +79,11 @@ class MainContainer extends Component {
   render () {
 
     const { 
+      viewport,
+      onViewportChange,
       panel, 
       center,
+      zoom,
       locations, 
       marker, 
       closeInfoWindow, 
@@ -86,12 +94,13 @@ class MainContainer extends Component {
       isError 
     } = this.props
 
-    console.log(center)
+    // console.log(center)
 
     return (
       <main
         id="map"
-        className={`panel-${panel ? 'show' : 'hidden'}`}>
+        className={`panel-${panel ? 'show' : 'hidden'}`}
+      >
 
         {modal && (
           <DetailsPage
@@ -101,25 +110,23 @@ class MainContainer extends Component {
           />
         )}  
 
-        <Map 
-          // zoomControl={false}
+        <Map
+          locations={locations}
+          marker={marker}
+          viewport={viewport}
+          onViewportChange={onViewportChange}
+          eventHandler={this.eventHandler}
+          closeInfoWindow={closeInfoWindow}
+          openModal={openModal}
+        />
           
-          containerStyle={{ width: '100%', height: '100%' }}
-          style="mapbox://styles/mapbox/streets-v8"
-          // style={{ height: `100%` }}
-          center={center}
-          // center={[this.props.center.lat, -this.props.center.lng]}
-          // viewport={this.state.viewport}
-          // scrollWheelZoom={infoWindow ? "center" : "true"}
-          zoom={[this.props.zoom]}
-        >
-          
-          <ZoomControl position="topright" />
+          {/* <ZoomControl position="topright" />
           <ScaleControl />
+          <RotationControl /> */}
 
           {/* <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" /> */}
 
-
+{/* 
           {locations.map(location => (
             <LocationMarker
               key={location.id}
@@ -132,7 +139,6 @@ class MainContainer extends Component {
               // onClick={() => this.eventHandler(location, location.position)}
               
             >
-              {/* {marker.id !== location.id && <Tooltip direction="right">{location.name}</Tooltip>} */}
             </LocationMarker>
           ))}
 
@@ -144,8 +150,8 @@ class MainContainer extends Component {
               closeInfoWindow={closeInfoWindow}
               openModal={openModal}
             />
-          )}
-        </Map>
+          )} */}
+
 
 
         {/* Error handling notification message */}
