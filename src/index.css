@@ -7,6 +7,7 @@
   --warn-color: #fd0;
   --black-color: #000;
   --dark-gray-color: #999;
+  --light-gray-color: #f1f1f1;
   --theme-color: #eaeaea;
 }
 
@@ -20,11 +21,12 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
 /* The emerging W3C standard
    that is currently Firefox-only */
-  * {
+* {
   scrollbar-width: thin;
-  scrollbar-color: blue orange;
+  scrollbar-color: var(--dark-gray-color) var(--light-gray-color);
 }
 
 /* Works on Chrome/Edge/Safari */
@@ -32,12 +34,12 @@ html {
   width: 12px;
 }
 *::-webkit-scrollbar-track {
-  background: orange;
+  background: var(--light-gray-color);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: blue;
+  background-color: var(--dark-gray-color);
   border-radius: 20px;
-  border: 3px solid orange;
+  border: 3px solid var(--light-gray-color);
 }
 
 body {

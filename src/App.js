@@ -5,12 +5,20 @@ import Header from './containers/Header.js';
 import Main from './containers/Main';
 import SidePanel from './containers/SidePanel';
 
+// To-Do
 import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
 
 import './App.css';
 
-
+const MyOverlay = { 
+  maxBounds: { 
+    minLatitude: 62,
+    maxLatitude: 68,
+    minLongitude: -24,
+    maxLongitude: -12
+  }
+}
 
 class App extends Component {
 
@@ -29,7 +37,7 @@ class App extends Component {
     viewport: {
       latitude: 64.85,
       longitude: -18.45,
-      zoom: 6
+      zoom: 5
     },
     isError: {
       connection: false,
@@ -51,7 +59,30 @@ class App extends Component {
     window.removeEventListener('offline', this.handleConnectionChange);
   }
 
-  onViewportChange = viewport => this.setState({ viewport });
+  
+  // Fix for maxbounds to fit the map only for Iceland view:
+  // https://github.com/visgl/react-map-gl/issues/442
+  onViewportChange = viewport => {
+    if ( viewport.longitude < MyOverlay.maxBounds.minLongitude ) {
+      viewport.longitude = MyOverlay.maxBounds.minLongitude;
+    }
+    else if ( viewport.longitude > MyOverlay.maxBounds.maxLongitude ) {
+      viewport.longitude = MyOverlay.maxBounds.maxLongitude;
+    }
+    else if ( viewport.latitude < MyOverlay.maxBounds.minLatitude ) {
+      viewport.latitude = MyOverlay.maxBounds.minLatitude;
+    }
+    else if ( viewport.latitude > MyOverlay.maxBounds.maxLatitude ) {
+      viewport.latitude = MyOverlay.maxBounds.maxLatitude;
+    }
+    this.setState( {
+      viewport: { ...this.state.viewport, ...viewport }
+    });
+  }
+  // Function on viewport change without map max bounds
+  // onViewportChange = viewport => this.setState({ viewport });
+
+
 
   // Change on online/offline detection
   // https://www.codementor.io/@nedson/a-guide-to-handling-internet-disconnection-in-react-applications-rs7u9zpwn

@@ -20,7 +20,7 @@ class Map extends Component {
       mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
       hillshading: true,
       rasterLayer: false,
-      attributionControl: false
+      attributionControl: false,
     }
   };
 
