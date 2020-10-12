@@ -1,20 +1,32 @@
 .pin {
   position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .pin svg {
   position: absolute;
   top: 0;
   left: 0;
+  transition: 150ms;
 }
 
 .bounce .pin-body {
   animation: bounce-body 300ms cubic-bezier(.20,.70,.80,.60);
 }
 
+.pin:hover .pin-body {
+  fill: var(--primary-color);
+  transform: translateY(-4px);
+}
+.pin:hover .pin-shadow {
+  fill: var(--primary-color);
+}
+
 
 @keyframes bounce-body {
-   50% { transform: translateY(-30%); }
+   50% { transform: translateY(-16px); }
   100% { transform: translateY(0); }
 }
 

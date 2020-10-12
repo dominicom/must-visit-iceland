@@ -32,7 +32,7 @@ const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coor
       >
 
         
-        <div id="talkbubble" className="info-window">
+        <div className="info-window">
           
           <h4>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h4>
           <h2>{info.name}</h2>
