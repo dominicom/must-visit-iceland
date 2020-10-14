@@ -35,15 +35,13 @@ html {
 
 /* Works on Chrome/Edge/Safari */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 *::-webkit-scrollbar-track {
   background: var(--light-gray-color);
 }
 *::-webkit-scrollbar-thumb {
   background-color: var(--dark-gray-color);
-  border-radius: 20px;
-  border: 3px solid var(--light-gray-color);
 }
 
 body {

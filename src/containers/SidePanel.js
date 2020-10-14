@@ -42,6 +42,7 @@ class SidePanel extends Component {
 
         <div className="side-panel-bar">
           <DebounceInput
+            className={`filter-input ${query !== '' ? `query state${locations.length === 0 ? "-error" : "-success"}` : null}`}
             type="text"
             placeholder="Filter..."
             onChange={(event) => this.queryHandler(event.target.value)}
