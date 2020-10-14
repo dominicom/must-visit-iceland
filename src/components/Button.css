@@ -48,3 +48,14 @@
 .btn-secondary:active {
   background-color: var(--alt-dark-gray-color);
 }
+
+.btn-accent {
+  color: var(--white-color);
+  background-color: var(--accent-color);
+}
+.btn-accent:hover {
+  background-color: var(--accent-color-darker);
+}
+.btn-accent:active {
+  background-color: var(--accent-color-darker-alt);
+}

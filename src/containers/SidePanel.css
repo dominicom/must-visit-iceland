@@ -5,7 +5,8 @@
   top: 0;
   background-color: var(--theme-color);
   z-index: 10;
-  display: block;
+  display: flex;
+  flex-direction: column;
   transition: 0.3s;
   font-size: inherit;
 }
@@ -52,27 +53,43 @@
 
 /* LIST OF LOCATIONS */
 
-.places-list {
+.locations-list {
   width: 100%;
-  height: calc(100vh - 4rem);
+  flex-grow: 1;
   padding: 1rem 1rem 2rem ;
   overflow-y: auto;
   text-align: left;
   outline: 0;
 }
 
+
 /* HAMBURGER ---> './Hamburger.css' */
 
-.side-panel .message {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+
+.side-panel .empty-state {
+  font-size: 0.875rem;
   text-align: center;
   color: var(--dark-gray-color);
   padding: 0;
-  text-transform: uppercase;
   margin: 0;
 }
+.side-panel .message {
+  text-align: center;
+  color: var(--dark-gray-color);
+}
+.side-panel .message h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.side-panel .action-panel {
+  padding: 1rem;
+  border-top: 2px solid var(--gray-color);
+}
+
+
 
 
 @media screen and (max-width: 360px) {
@@ -86,9 +103,6 @@
   }
   .side-panel.hidden {
     right: -100%;
-  }
-  .places-list {
-    height: calc(100% - 4rem);
   }
   .hamburger {
     position: fixed;

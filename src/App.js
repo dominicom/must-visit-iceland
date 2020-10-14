@@ -10,7 +10,7 @@ import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
 
 import './App.css';
-import { PositionOptions } from 'mapbox-gl';
+// import { PositionOptions } from 'mapbox-gl';
 
 const MyOverlay = { 
   maxBounds: { 
@@ -24,12 +24,12 @@ const MyOverlay = {
 class App extends Component {
 
   state = {
-    panel: false,
+    panel: true,
     locations: [],
     selectedMarker: [],
     infoWindow: false,
     modal: false,
-    query: '',
+    // query: '',
     center: {
       lat: 64.85,
       lng: -18.45

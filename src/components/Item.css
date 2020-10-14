@@ -1,4 +1,4 @@
-.places-list .item {
+.locations-list .item {
   display: flex;
   flex-direction: column;
   font-family: 'Roboto Mono', monospace;
@@ -12,12 +12,12 @@
 }
 
 
-.places-list .item.details-show {
+.locations-list .item.details-show {
   max-height: 100%;
   background-color: var(--white-color);
 }
 
-.places-list .item.details-hidden {
+.locations-list .item.details-hidden {
   overflow: hidden;
   max-height: 5.5rem;
 }
@@ -48,23 +48,23 @@
 }
 
 
-.places-list .item.details-show .details-container {
+.locations-list .item.details-show .details-container {
   transition: translate(0, 0);
 
 }
-.places-list .item.details-hidden .details-container {
+.locations-list .item.details-hidden .details-container {
   transition: translate(0, -300px);
 }
 
 
 
 
-.places-list .item a {
+.locations-list .item a {
   text-decoration: none;
   color: var(--dark-gray-color);
   cursor: pointer;
 }
-.places-list .item ul {
+.locations-list .item ul {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.75em;

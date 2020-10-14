@@ -3,7 +3,8 @@ import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 
 import Hamburger from '../components/Hamburger';
-import Item from '../components/Item'
+import Item from '../components/Item';
+import Button from '../components/Button';
 
 import './SidePanel.css';
 
@@ -54,7 +55,11 @@ class SidePanel extends Component {
           />
         </div>
 
-        <div className="places-list" tabIndex={panel ? 0 : -1} aria-label={`List of ${locations.length} locations`}>
+        <div 
+          className={`locations-list${locations.length === 0 ? " empty" : ""}`} 
+          tabIndex={panel ? 0 : -1} 
+          aria-label={`List of ${locations.length} locations`}
+        >
             {locations.map(location => (
               <Item
                 key={location.id}
@@ -66,9 +71,31 @@ class SidePanel extends Component {
               />
             ))}
             {locations.length === 0 && (
-              <p className="message">No results</p>
+              <div className="empty-state">
+                <div className="message">
+                  <h2>No results</h2>
+                  <p>it looks like there is no searched location or query word is invalid. Try again.</p>
+                </div>
+                <Button 
+                  type="primary"
+                  onClick={() => this.queryHandler('')}
+                  label="Clear filter"
+                />
+
+              </div>
             )}
+
         </div>
+
+        {query && locations.length !== 0 && (
+              <div className="action-panel">
+                <Button 
+                  type="accent"
+                  onClick={() => this.queryHandler('')}
+                  label="Clear results"
+                />
+              </div>
+            )}
       </aside>
     );
   }
