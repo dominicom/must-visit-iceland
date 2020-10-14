@@ -30,37 +30,21 @@ main {
 main.panel-hidden {
   width: 100%;
 }
-
-main.panel-show {
-  width: calc(100% - 300px);
+@media screen and (min-width: 601px) {
+  main.panel-show {
+    width: calc(100% - 300px);
+  }
 }
 
+/*
+  Modals
+*/
 
-
-
-
-
-
-/* COMMON ELEMENTS */
-
-.details-button {
-  border: none;
-  outline: none;
-  padding: 0.8em;
-  font-family: inherit;
-  font-size: 1rem;
-  background-color: #06a;
-  color: #fff;
-  cursor: pointer;
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem
 }
-.details-button:hover {
-  background-color: #004d80;
-}
-.details-button:active {
-  background-color: #06a;
-}
-
-
 
 /*
 /* ERROR message
@@ -73,7 +57,7 @@ main.panel-show {
   width: 100%;
   font-family: 'Roboto Mono', monospace;
   font-size: 0.8em;
-  background-color: #fd0;
+  background-color: var(--warning-color);
   text-align: left;
   padding: 1em;
 }

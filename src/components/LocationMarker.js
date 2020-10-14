@@ -7,36 +7,17 @@ import Pin from '../icons/Pin';
 
 import './LocationMarker.css';
 
-const LocationMarker = (props) => {
+const LocationMarker = ({ location, marker, eventHandler }) => {
   return (
     <Marker 
       // title={props.name}
-      className={`marker ${props.marker.id === props.location.id ? 'bounce active' : ''}`}
-      // title={props.name}
-      // coordinates={props.coordinates} 
-      // anchor="bottom"
-      
-      // onClick={() => props.eventHandler(props.location, props.coordinates)}
+      className={`marker ${marker.id === location.id ? 'bounce active' : ''}`}
       // tabIndex={props.panel ? -1 : 0}
-      latitude={props.location.position.lat} 
-      longitude={props.location.position.lng}
+      latitude={location.position.lat} 
+      longitude={location.position.lng}
       offsetLeft={-24} offsetTop={-64}
     >
-        <Pin onClick={() => props.eventHandler(props.location, props.coordinates)} />
-      {/* <img src={Pin}
-          width={48}
-          height={64}
-          alt={`Marker of location ${props.location.altname ? props.location.altname : props.location.title}`}
-          
-          tabIndex={props.panel ? -1 : 0}
-        /> */}
-      {/* <div
-        title={props.name}
-        className={`marker ${props.marker.id === props.location.id ? 'bounce' : 'pin'}`}>
-
-
-
-      </div> */}
+      <Pin onClick={() => eventHandler(location)} />
     </Marker>
   );
 }

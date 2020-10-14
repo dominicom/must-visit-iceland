@@ -1,14 +1,18 @@
 :root {
   --primary-color: #06a;
   --primary-color-darker: #004d80;
+  --primary-color-darker-alt: #002944;
   --accent-color: #e1002c;
   --accent-color-darker: #b0002c;
   --white-color: #fff;
-  --warn-color: #fd0;
+  --warning-color: #fd0;
   --black-color: #000;
-  --dark-gray-color: #999;
-  --light-gray-color: #f1f1f1;
-  --theme-color: #eaeaea;
+  --alt-dark-gray-color: #333;
+  --dark-gray-color: #666;
+  --gray-color: #999;
+  --light-gray-color: #ccc;
+  --alt-light-gray-color: #eaeaea;
+  --theme-color:  #f1f1f1;
 }
 
 
@@ -26,7 +30,7 @@ html {
    that is currently Firefox-only */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--dark-gray-color) var(--light-gray-color);
+  scrollbar-color: var(--dark-gray-color) var(--alt-light-gray-color);
 }
 
 /* Works on Chrome/Edge/Safari */
@@ -45,10 +49,12 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #f1f1f1;
+  background-color: var(--theme-color);
   font-family: 'Roboto', sans-serif;
   font-size: 100%;
 }
 ul, li {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }

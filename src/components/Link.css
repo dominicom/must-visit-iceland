@@ -1,0 +1,22 @@
+.link {
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  background: none;
+  cursor: pointer;
+  transition: 150ms ease;
+  color: var(--primary-color);
+}
+.link:hover {
+  color: var(--primary-color-darker);
+}
+.link:active {
+  color: var(--primary-color-darker-alt);
+}
+.link:focus {
+  outline: 1px dashed var(--primary-color);
+}

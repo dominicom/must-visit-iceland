@@ -52,7 +52,7 @@
 .photos,
 .facts,
 .position {
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 
@@ -80,14 +80,6 @@
   align-items: flex-start;
 }
 
-.photos-link,
-.data-link {
-  font-size: 0.7em;
-}
-.photos-link a,
-.data-link a {
-  color: var(--primary-color);
-}
 
 /* PHOTOS article */
 
@@ -98,7 +90,7 @@
 
 .photos-gallery {
   padding-left: 0;
-  margin: 0 0 1em;
+  margin: 0 0 1rem;
 }
 
 
@@ -106,7 +98,7 @@
   margin: 0 0.5em 0.5em 0;
   width: 175px;
   height: 120px;
-  background-color: #f1f1f1;
+  background-color: var(--light-gray-color);
 }
 .photos-gallery li:last-child {
   margin-right: 0;
@@ -126,16 +118,17 @@
   font-weight: 300;
   max-height: 200px;
   overflow-y: auto;
-  background-color: #f1f1f1;
+  background-color: var(--theme-color);
   border-top: 1px solid var(--dark-gray-color);
   border-bottom: 1px solid var(--dark-gray-color);
 }
 
 .facts .content {
-  font-size: 0.8em;
+  font-size: 0.875rem;
+  line-height: 1.45rem;
 }
 .data-link {
-  margin: 0 0 1em;
+  margin: 0 0 1rem;
   font-weight: 400;
 }
 

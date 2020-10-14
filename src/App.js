@@ -10,6 +10,7 @@ import MapTheme from './styles/map-style.json';
 import * as data from './data/locations.json';
 
 import './App.css';
+import { PositionOptions } from 'mapbox-gl';
 
 const MyOverlay = { 
   maxBounds: { 
@@ -220,9 +221,9 @@ class App extends Component {
 
 
   // Focus view on clicked location function -> marker & list
-  centerMap = (location, pos) => {
+  centerMap = (location) => {
     // console.log("iwenthandler", pos, location)
-    this.setState({ viewport: { latitude: pos[0], longitude: pos[1], zoom: this.state.viewport.zoom } });
+    this.setState({ viewport: { latitude: location.position.lat, longitude: location.position.lng, zoom: this.state.viewport.zoom } });
     this.openInfoWindow(location);
   }
 

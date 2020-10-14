@@ -9,11 +9,6 @@ const TOKEN = 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNT
 class Map extends Component {
 
   state = {
-    viewport: {
-      latitude: 64,
-      longitude: -20,
-      zoom: 2
-    },
     settings: {
       width: '100%',
       height: '100%',
@@ -21,6 +16,7 @@ class Map extends Component {
       hillshading: true,
       rasterLayer: false,
       attributionControl: false,
+      minZoom: 4
     }
   };
 
@@ -30,9 +26,7 @@ class Map extends Component {
     const { 
       viewport,
       onViewportChange,
-      panel, 
-      center,
-      zoom,
+      panel,
       locations, 
       marker, 
       closeInfoWindow, 
@@ -46,15 +40,15 @@ class Map extends Component {
 
     return (
       <ReactMapGL
-        //{...this.state.viewport}
         {...viewport}
         {...settings}
-        // onViewportChange={(viewport) => this.setState({viewport})}
-        onViewportChange={this.props.onViewportChange}
+        onViewportChange={onViewportChange}
         mapboxApiAccessToken={TOKEN}
       >
-        {/* <NavigationControl />
-        <ScaleControl /> */}
+        {/* 
+          <NavigationControl />
+          <ScaleControl /> 
+        */}
         {locations.map(location => (
             <LocationMarker
               key={location.id}

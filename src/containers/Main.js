@@ -99,7 +99,7 @@ class MainContainer extends Component {
     return (
       <main
         id="map"
-        className={`panel-${panel ? 'show' : 'hidden'}`}
+        className={`main-container panel-${panel ? 'show' : 'hidden'}`}
       >
 
         {modal && (

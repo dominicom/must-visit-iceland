@@ -3,7 +3,7 @@
   width: 300px;
   height: 100%;
   top: 0;
-  background-color: #f1f1f1;
+  background-color: var(--theme-color);
   z-index: 10;
   display: block;
   transition: 0.3s;
@@ -23,7 +23,7 @@
   flex: 1;
   width: 100%;
   height: 62px;
-  border-bottom: 2px solid #999;
+  border-bottom: 2px solid var(--dark-gray-color);
   display: inline-flex;
   justify-content: center;
 
@@ -42,8 +42,8 @@
 .places-list {
   width: 100%;
   height: calc(100vh - 62px);
-  padding: 1.5em;
-  overflow-y: scroll;
+  padding: 1rem ;
+  overflow-y: auto;
   text-align: left;
 }
 
@@ -54,7 +54,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-align: center;
-  color: #999;
+  color: var(--dark-gray-color);
   padding: 0;
   text-transform: uppercase;
   margin: 0;

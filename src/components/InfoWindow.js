@@ -4,6 +4,8 @@ import { Popup } from 'react-map-gl';
 // import { Popup } from 'react-leaflet';
 import * as FocusTrap from '../utils/FocusTrap';
 
+import Button from './Button';
+
 import './InfoWindow.css';
 
 
@@ -40,11 +42,13 @@ const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coor
 
           <img src={info.photos[0]} width={200} />
 
-          <button className="details-button"
+          <Button type="secondary"
                   onClick={() => {
                     openModal();
                     FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
-                  }}>Details</button>
+                  }}
+                  label="Details"
+          />
 
 
           
