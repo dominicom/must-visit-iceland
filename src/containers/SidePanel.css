@@ -88,13 +88,22 @@
   padding: 1rem;
   border-top: 2px solid var(--gray-color);
 }
-
-
-
+.side-panel .action-panel h2 {
+  color: var(--dark-gray-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
 
 @media screen and (max-width: 360px) {
   .side-panel {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .side-panel {
     height: calc(100vh - 4rem);
     top: 4rem;
   }
@@ -103,15 +112,5 @@
   }
   .side-panel.hidden {
     right: -100%;
-  }
-  .hamburger {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-  }
-  main.panel-show,
-  main.panel-hidden {
-    width: 100%;
   }
 }

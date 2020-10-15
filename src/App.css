@@ -10,6 +10,17 @@ header,
 main {
   display: flex;
   flex-wrap: nowrap;
+  transition: width 300ms ease;
+}
+main.panel-hidden,
+header.panel-hidden {
+  width: 100%;
+}
+@media screen and (min-width: 601px) {
+  main.panel-show,
+  header.panel-show {
+    width: calc(100% - 300px);
+  }
 }
 
 .app {
@@ -20,21 +31,14 @@ main {
 /* MAIN CONTAINER */
 
 main {
-  height: calc(100vh - 62px);
-  transition: width 0.3s;
+  height: calc(100vh - 4rem);
   outline: none;
   overflow: hidden;
 
   /* width: 100%; */
 }
-main.panel-hidden {
-  width: 100%;
-}
-@media screen and (min-width: 601px) {
-  main.panel-show {
-    width: calc(100% - 300px);
-  }
-}
+
+
 
 /*
   Modals

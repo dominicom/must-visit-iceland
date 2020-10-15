@@ -1,28 +1,39 @@
 .info-window {
   background-color: var(--white-color);
-  /* padding: 1.5em 1em 1em; */
   cursor: default;
   background: var(--white-color);
-  /* border-radius: 5px; */
   text-align: left;
 }
 
-
-
-.info-window h2 {
-  /* font-weight: 500; */
-  font-size: 1.25em;
+.info-window-header,
+.info-window-action-panel {
+  padding: 1rem;
 }
-.info-window h4 {
+
+
+.info-window-header h4 {
+  margin: 0 0 0.5rem 0;
   font-weight: 500;
-  font-size: 0.875em;
+  font-size: 0.75rem;
+}
+.info-window-header h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+.info-window-thumbnail {
+  background-color: var(--light-gray-color);
+  background-size: cover;
+  width: 12rem;
+  height: 8rem;
+  overflow: hidden;
 }
 
-.info-window .details-button {
-  /* font-size: 1.25em; */
+.info-window-action-panel {
+  text-align: center;
 }
 
-.info-window .close {
+/* .info-window .close {
   position: absolute;
   background-image: url('../icons/close.svg');
   background-color: inherit;
@@ -34,4 +45,20 @@
   border: none;
   outline: none;
   cursor: pointer;
+} */
+
+/*
+  OVERRIDDEN MAPBOX STYLES
+*/
+
+
+.mapboxgl-popup .mapboxgl-popup-content {
+  font: inherit;
+  padding: 0;
+  border-radius: 8px;
+  width: 12rem;
+  overflow: hidden;
+}
+.mapboxgl-popup-close-button {
+  display: none;
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 
-import Hamburger from '../components/Hamburger';
 import Item from '../components/Item';
 import Button from '../components/Button';
 
@@ -30,17 +29,11 @@ class SidePanel extends Component {
   }
 
   render () {
-    const { toggle, panel, locations, eventHandler, openModal } = this.props
+    const { panel, locations, eventHandler, openModal } = this.props
     const { query } = this.state
 
     return (
       <aside className={`side-panel ${panel ? 'show' : 'hidden'}`}>
-
-        <Hamburger
-          toggle={toggle}
-          panel={panel}
-        />
-
         <div className="side-panel-bar">
           <DebounceInput
             className={`filter-input ${query !== '' ? `query state${locations.length === 0 ? "-error" : "-success"}` : null}`}
@@ -80,6 +73,7 @@ class SidePanel extends Component {
                   type="primary"
                   onClick={() => this.queryHandler('')}
                   label="Clear filter"
+                  ariaLabel="Clear filter"
                 />
 
               </div>
@@ -89,10 +83,12 @@ class SidePanel extends Component {
 
         {query && locations.length !== 0 && (
               <div className="action-panel">
+                <h2>{`${locations.length} ${locations.length > 1 ? "results" : "result"} found`}</h2>
                 <Button 
                   type="accent"
                   onClick={() => this.queryHandler('')}
                   label="Clear results"
+                  ariaLabel="Clear results"
                 />
               </div>
             )}

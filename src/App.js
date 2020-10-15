@@ -216,7 +216,6 @@ class App extends Component {
   toggleSidePanel = (panel) => {
     panel = this.state.panel
     panel ? this.setState({ panel: false }) : this.setState({ panel: true });
-    console.log("skonsoluj mi ten klik")
   }
 
 
@@ -260,7 +259,10 @@ class App extends Component {
     return (
 
       <div className="app">
-        <Header />
+        <Header 
+          toggle={this.toggleSidePanel}
+          panel={panel}
+        />
 
         <SidePanel
           toggle={this.toggleSidePanel}
@@ -291,7 +293,6 @@ class App extends Component {
           closeModal={this.closeModal}
           openModal={this.openModal}
           isError={isError}
-          // isDisconnected={this.state.isDisconnected}
         />
 
       </div>

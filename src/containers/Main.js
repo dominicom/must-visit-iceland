@@ -1,15 +1,8 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ReactMapGL from 'react-map-gl';
-// import ReactMapboxGl, { 
-//   ZoomControl, 
-//   ScaleControl,
-//   RotationControl 
-// } from 'react-mapbox-gl';
 
 import Map from '../components/Map';
-
 import DetailsPage from './DetailsPage';
 
 import './Main.css';
@@ -81,9 +74,7 @@ class MainContainer extends Component {
     const { 
       viewport,
       onViewportChange,
-      panel, 
-      center,
-      zoom,
+      panel,
       locations, 
       marker, 
       closeInfoWindow, 

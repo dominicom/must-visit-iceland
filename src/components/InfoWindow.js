@@ -5,52 +5,46 @@ import { Popup } from 'react-map-gl';
 import * as FocusTrap from '../utils/FocusTrap';
 
 import Button from './Button';
+import CloseButton from './CloseButton';
 
 import './InfoWindow.css';
-
-
-
-const overrideStyle = {
-  popup: {
-    bottom: 10
-  }
-}
 
 
 const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coordinates }) => {
     console.log("InfoWindow, marker:", info, infoWindow);
     return (
       <Popup 
-        // minWidth={400}
-        // coordinates={coordinates}
-        tipSize={16}
+        tipSize={8}
         anchor="top"
         longitude={marker.position.lng}
         latitude={marker.position.lat}
-        // closeOnClick={false}
-        // onClose={() => this.setState({popupInfo: null})} 
-        // offset={[0, -45]}
-        onClose={() => closeInfoWindow()}
       >
 
         
         <div className="info-window">
-          
-          <h4>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h4>
-          <h2>{info.name}</h2>
-          <button className="close" onClick={(event) => closeInfoWindow()}>Close</button>
+          <div className="info-window-header">
+            <h4>{info.altname ? info.altname : `${info.title} ${info.category[0]}`}</h4>
+            <h2>{info.name}</h2>
+          </div>
 
-          <img src={info.photos[0]} width={200} />
-
-          <Button type="secondary"
-                  onClick={() => {
-                    openModal();
-                    FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
-                  }}
-                  label="Details"
+          <div 
+            className="info-window-thumbnail"
+            style={{ backgroundImage: `url(${info.photos[0]})` }}
+            role="img"
           />
+          
+          <div className="info-window-action-panel">
+            <Button 
+              type="primary"
+              onClick={() => {
+                openModal();
+                FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
+              }}
+              label="Details"
+            />
+          </div>
 
-
+          <CloseButton onClick={() => closeInfoWindow()} />
           
 
           {/* <div id="triangle"></div> */}

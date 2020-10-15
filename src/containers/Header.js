@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import Navigation from '../components/Navigation';
 
 import Flag from '../icons/flag.svg';
 
 import './Header.css';
 
-class Header extends Component {
-  render () {
-    return (
-      <header className="logo" role="banner">
-        <img className="flag" alt="Logo" src={Flag}/>
-        <h2 className="slogan">Must Visit Iceland</h2>
-      </header>
-    );
-  }
-}
+const Header = ({ toggle, panel }) => (
+  <header className={`header-container panel-${panel ? 'show' : 'hidden'}`}>
+    <div className="logo" role="banner">
+      <img className="flag" alt="Logo" src={Flag}/>
+      <h2 className="app-name">Must Visit Iceland</h2>
+    </div>
+    <Navigation 
+      toggle={toggle}
+      panel={panel}
+    />
+  </header>
+);
+
 
 export default Header;

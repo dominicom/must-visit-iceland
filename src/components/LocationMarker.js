@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Marker } from 'react-map-gl'; 
 
-import Pin from '../icons/Pin';
+import Pin from './Pin';
 
 import './LocationMarker.css';
 

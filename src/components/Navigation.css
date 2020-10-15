@@ -1,0 +1,10 @@
+.navigation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  padding-bottom: 0.125rem;
+}
+

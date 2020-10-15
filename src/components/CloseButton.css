@@ -1,0 +1,26 @@
+.close-button {
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  color: var(--dark-gray-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 150ms ease;
+}
+
+.close-button:hover {
+  color: var(--alt-dark-gray-color);
+  background-color: var(--alt-light-gray-color);
+}
+.close-button:active {
+  color: var(--black-color);
+  background-color: var(--light-gray-color);
+}
+
+.close-button svg {
+  fill: currentColor;
+}

@@ -1,7 +1,6 @@
 
 .button {
   border: none;
-  outline: none;
   padding: 0.75rem 1rem;
   font-family: inherit;
   font-weight: 500;
@@ -11,7 +10,9 @@
   cursor: pointer;
   transition: 150ms ease;
 }
-
+.button:focus {
+  outline-color: var(--black-color);
+}
 
 .btn-default {
   color: var(--dark-gray-color);

@@ -44,6 +44,7 @@ class Map extends Component {
         {...settings}
         onViewportChange={onViewportChange}
         mapboxApiAccessToken={TOKEN}
+        onClick={infoWindow ? () => closeInfoWindow() : null}
       >
         {/* 
           <NavigationControl />

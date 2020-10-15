@@ -1,28 +1,42 @@
-.logo {
+.header-container {
+  position: relative;
   height: 4rem;
   width: 100%;
   background-color: var(--white-color);
   border-bottom: 2px solid var(--dark-gray-color);
   display: flex;
   flex-wrap: nowrap;
+  padding-right: 4rem;
+}
+
+.logo {
+  height: 4rem;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .flag {
-  width: 50px;
-  height: 36px;
+  width: 3rem;
+  height: 2rem;
   margin: auto 1em;
 }
 
-.slogan {
+.app-name {
   margin: auto 1em auto 0;
   padding: 0;
+  text-align: left;
   color: var(--primary-color);
-  font-size: 1.2em;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
 @media screen and (max-width: 360px) {
-  .slogan {
-    display: none;
+  .app-name {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 280px) {
+  .app-name {
+    font-size: 0.75rem;
   }
 }
