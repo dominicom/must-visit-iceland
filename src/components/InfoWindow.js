@@ -41,14 +41,11 @@ const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coor
                 FocusTrap.onFocus(); // FOCUS TRAP function to set focus on modal window of location details, <DetailsPage/> Component
               }}
               label="Details"
+              ariaLabel="Close window"
             />
           </div>
 
           <CloseButton onClick={() => closeInfoWindow()} />
-          
-
-          {/* <div id="triangle"></div> */}
-          
         </div>
       </Popup>
     );

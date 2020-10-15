@@ -1,7 +1,6 @@
 .info-window {
   background-color: var(--white-color);
   cursor: default;
-  background: var(--white-color);
   text-align: left;
 }
 
@@ -33,19 +32,6 @@
   text-align: center;
 }
 
-/* .info-window .close {
-  position: absolute;
-  background-image: url('../icons/close.svg');
-  background-color: inherit;
-  top: 10px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  font-size: 0;
-  border: none;
-  outline: none;
-  cursor: pointer;
-} */
 
 /*
   OVERRIDDEN MAPBOX STYLES

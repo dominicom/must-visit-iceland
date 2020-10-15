@@ -15,6 +15,8 @@
 */
 .location-detail-page {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: var(--white-color);
   font-size: 0.875rem;
 
@@ -40,7 +42,7 @@
 .photos,
 .facts,
 .position {
-  padding: 0 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 
@@ -51,11 +53,7 @@
   margin: 0 1.5rem;
   color: var(--alt-dark-gray-color);
   text-align: left;
-}
-
-.name,
-.alt-name {
-
+  padding-bottom: 0.5rem;
 }
 
 .alt-name {
@@ -70,26 +68,48 @@
   font-weight: 400;
 }
 
+.modal-body {
+  
+  overflow-y: auto;
+  border-top: 1px solid var(--dark-gray-color);
+  border-bottom: 1px solid var(--dark-gray-color);
+}
+@media screen and (max-width: 768px) {
+  .modal-body {
+    flex-grow: 1;
+  }
+}
+@media screen and (min-width: 769px) {
+  .modal-body {
+    max-height: calc(100vh - 17rem);
+  }
+}
+
 /*
-/*   ARTICLES Content
+/*   Section Content
 */
+.section-name {
+  text-align: left;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+}
+
 .photos-gallery,
 .photos-link,
 .data-link,
-.position {
+.position-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-start;
   align-items: center;
-  /* font-size: 0.75rem; */
 }
 
 
-/* PHOTOS article */
+/* PHOTOS section */
 
 .location-detail-page .photos {
-  border-top: 1px solid var(--dark-gray-color);
   display: block;
   text-align: left;
 }
@@ -117,16 +137,12 @@
   background-size: cover;
 }
 
-/* FACTS article */
+/* FACTS section */
 
 .location-detail-page .facts {
   text-align: left;
   font-weight: 300;
-  max-height: 200px;
-  overflow-y: auto;
   background-color: var(--theme-color);
-  border-top: 1px solid var(--dark-gray-color);
-  border-bottom: 1px solid var(--dark-gray-color);
 }
 
 .facts .content {
@@ -147,7 +163,7 @@
   font-weight: 400;
 }
 
-/* POSITION GPS article */
+/* POSITION GPS section */
 
 .location-detail-page .position {
   font-size: 0.875rem;
@@ -155,17 +171,17 @@
   color: var(--dark-gray-color);
 }
 
-.location-detail-page .position p {
+
+
+.location-detail-page .coordinates {
+  display: inline-flex;
+}
+.location-detail-page .coordinates p {
   text-align: left;
   margin: 0 1em 0 0;
 }
 
-.location-detail-page .position p:first-child {
-  font-weight: 600;
-  margin: 0 0.5em 0 0;
-}
-
-.location-detail-page .position span {
+.location-detail-page .coordinates span {
   font-family: 'Roboto Mono', monospace;
   color: var(--primary-color);
 }
@@ -194,7 +210,7 @@
   }
 
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .location-detail-page {
     height: 100vh;
     margin: 0;
@@ -204,12 +220,6 @@
   }
   .photos-gallery {
     justify-content: flex-start;
-  }
-  .location-detail-page .close {
-    top: 10px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
   }
 }
 

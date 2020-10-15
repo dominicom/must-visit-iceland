@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './CloseButton.css';
 
@@ -13,6 +14,10 @@ const CloseButton = ({ onClick, ariaLabel }) => (
 );
 
 export default CloseButton;
+
+CloseButton.propTypes = {
+  onClick: PropTypes.func.isRequired
+}
 
 const Icon = () => (
   <svg 

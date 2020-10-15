@@ -31,7 +31,7 @@ const DetailsPage = (props) => {
               aria-label= {`You have opened details page of ${marker.altname ? marker.name + ' ' + marker.altname : marker.name}`}
               aria-modal="true"
             >
-              <div className="location-name-header" tabIndex="0">
+              <div className="location-name-header modal-header" tabIndex="0">
                 <h4
                   className="alt-name">
                     {marker.altname}
@@ -41,58 +41,63 @@ const DetailsPage = (props) => {
                     {marker.name}
                 </h2>
               </div>
-
-              <section className="photos">
-
-                <ul className="photos-gallery">
-                  {marker.photos ? marker.photos.map(photo => (
-                    <li key={photo}>
-                      <a href={photo}
-                        target="_blank"
-                        aria-label={`Image of ${marker.name}`}>
-                        <div className="photo"
-                          style={{ backgroundImage: `url(${photo})` }}
-                          role="img">
-                        </div>
-                      </a>
-                    </li>
-                  )) : null}
-                  {/* TO-DO: Place holder */}
-                </ul>
-
-
-                <div className="photos-link">
-                  <span>Powered by Flickr</span>
-                  <Link to={`https://www.flickr.com/search/?text=${marker.title}`} arrow label="More photos" />
-                </div>
-
-              </section>
+              <div className="modal-body">
+                <section className="photos">
+                  <p className="section-name">Gallery</p>
+                  <ul className="photos-gallery">
+                    {marker.photos ? marker.photos.map(photo => (
+                      <li key={photo}>
+                        <a href={photo}
+                          target="_blank"
+                          aria-label={`Image of ${marker.name}`}>
+                          <div className="photo"
+                            style={{ backgroundImage: `url(${photo})` }}
+                            role="img">
+                          </div>
+                        </a>
+                      </li>
+                    )) : null}
+                    {/* TO-DO: Place holder */}
+                  </ul>
 
 
-              <section className="facts" tabIndex="0">
-                <div className="content" dangerouslySetInnerHTML={{__html: marker.info }} />
-                <div className="data-link">
-                  <span>Powered by Wikipedia</span>
-                  <Link to={`https://en.wikipedia.org/wiki/${marker.title}`} arrow label="Source" />  
-                </div>
-              </section>
+                  <div className="photos-link">
+                    <span>Powered by Flickr</span>
+                    <Link to={`https://www.flickr.com/search/?text=${marker.title}`} arrow label="More photos" />
+                  </div>
 
-              {latitude && longitude && (
-                <section 
-                  className="position"
-                  tabIndex="0"
-                  aria-label="Position GPS"
-                >
-                  <div aria-label="">    
-                    <p aria-disabled="true">GPS:</p>
-                    N: <span tabIndex="0" aria-label={`Latitude ${latitude} °N`}>{latitude}</span>
-                    / E: <span tabIndex="0" aria-label={`Longitude ${longitude} °E`}>{longitude}</span>
-                  </div> 
-
-                  <Link to={`https://www.google.com/maps/@${latitude},${longitude},13z`} arrow label="See location in Google Maps" /> 
                 </section>
-              )}
 
+
+                <section className="facts" tabIndex="0">
+                  <p className="section-name">Facts</p>
+                  <div className="content" dangerouslySetInnerHTML={{__html: marker.info }} />
+                  <div className="data-link">
+                    <span>Powered by Wikipedia</span>
+                    <Link to={`https://en.wikipedia.org/wiki/${marker.title}`} arrow label="Source" />  
+                  </div>
+                </section>
+
+                {latitude && longitude && (
+                  <section 
+                    className="position"
+                    tabIndex="0"
+                    aria-label="Position GPS"
+                  > 
+                    <p className="section-name">GPS</p>
+                    <div className="position-content">
+                      <div className="coordinates">
+                        <p>N: <span tabIndex="0" aria-label={`Latitude ${latitude} °N`}>{latitude}</span></p>
+                        <p>E: <span tabIndex="0" aria-label={`Longitude ${longitude} °E`}>{longitude}</span></p>
+                      </div>
+
+                      <Link to={`https://www.google.com/maps/@${latitude},${longitude},13z`} arrow label="See location in Google Maps" /> 
+                    </div> 
+
+                    
+                  </section>
+                )}
+              </div>
 
               <div className="modal-footer">
                 <Button 
@@ -107,24 +112,22 @@ const DetailsPage = (props) => {
               <CloseButton onClick={() => closeModal()} />
 
 
-
-            {/* <button className="close"
-                    onClick={() => closeModal()}>Close</button> */}
-
             </article>
           ) : (
             <div className="location-detail-page error">
-            <span>Slow network or you are offline</span>
-            <p>No information loaded. Please refresh App!</p>
-            <div className="modal-footer">
-              <Button 
-                type="primary" 
-                onClick={() => closeModal()}  
-                label="Close"
-                ariaLabel="Close window"
-              />
+              <span>Slow network or you are offline</span>
+              <p>No information loaded. Please refresh App!</p>
+
+              <div className="modal-footer">
+                <Button 
+                  type="primary" 
+                  onClick={() => closeModal()}  
+                  label="Close"
+                  ariaLabel="Close window"
+                />
+              </div>
+              <CloseButton onClick={() => closeModal()} />
             </div>
-          </div>
           )}
         </div>
       </div>
