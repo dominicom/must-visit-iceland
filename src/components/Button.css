@@ -21,11 +21,11 @@
 }
 .btn-default:hover {
   color: var(--alt-dark-gray-color);
-  background-color: var(--alt-light-gray-color);
+  background-color: var(--light-gray-color);
 }
 .btn-default:active {
   color: var(--black-color);
-  background-color: var(--light-gray-color);
+  background-color: var(--medium-gray-color);
 }
 
 .btn-primary {

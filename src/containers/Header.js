@@ -2,7 +2,7 @@ import React from 'react';
 
 import Navigation from '../components/Navigation';
 
-import Flag from '../icons/flag.svg';
+import Flag from '../images/flag.svg';
 
 import './Header.css';
 

@@ -11,9 +11,10 @@
   --alt-dark-gray-color: #333;
   --dark-gray-color: #666;
   --gray-color: #999;
-  --light-gray-color: #ccc;
-  --alt-light-gray-color: #eaeaea;
-  --theme-color:  #f1f1f1;
+  --medium-gray-color: #ccc;
+  --light-gray-color: #eaeaea;
+  --alt-light-gray-color: #f8f8f8;
+  --theme-color:  #f0f0f0;
 }
 
 
@@ -31,7 +32,7 @@ html {
    that is currently Firefox-only */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--dark-gray-color) var(--alt-light-gray-color);
+  scrollbar-color: var(--dark-gray-color) var(--light-gray-color);
 }
 
 /* Works on Chrome/Edge/Safari */
@@ -39,7 +40,7 @@ html {
   width: 8px;
 }
 *::-webkit-scrollbar-track {
-  background: var(--light-gray-color);
+  background: var(--medium-gray-color);
 }
 *::-webkit-scrollbar-thumb {
   background-color: var(--dark-gray-color);

@@ -24,12 +24,11 @@ const MyOverlay = {
 class App extends Component {
 
   state = {
-    panel: true,
+    panel: false,
     locations: [],
     selectedMarker: [],
     infoWindow: false,
     modal: false,
-    // query: '',
     center: {
       lat: 64.85,
       lng: -18.45
@@ -159,7 +158,7 @@ class App extends Component {
           .then(data => {
             let picArray = data.photos.photo.map(pic => {
 
-              let src = `http://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`;
+              let src = `https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`;
               return src;
             })
             pics.push(...picArray);
@@ -265,7 +264,6 @@ class App extends Component {
         />
 
         <SidePanel
-          toggle={this.toggleSidePanel}
           panel={panel}
           locations={locations}
           eventHandler={this.centerMap}

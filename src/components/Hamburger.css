@@ -10,12 +10,15 @@
   transition: background-color 300ms ease;
 }
 .hamburger:hover {
-  background-color: var(--alt-light-gray-color);
-}
-.hamburger:active {
   background-color: var(--light-gray-color);
 }
-
+.hamburger:active {
+  background-color: var(--medium-gray-color);
+}
+.hamburger svg {
+  width: 3rem;
+  height: 3rem;
+}
 
 
 .hamburger-element {

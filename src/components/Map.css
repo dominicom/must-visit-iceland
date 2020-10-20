@@ -1,0 +1,23 @@
+.map-control {
+  position: absolute;
+  padding: 0.5rem;
+  display: flex;
+}
+.map-control.navigation-control {
+  top: 0;
+  left: 0;
+}
+.map-control.scale-control {
+  bottom: 0;
+  right: 0;
+}
+
+/* 
+    MAPBOX styles overides 
+*/
+.mapboxgl-ctrl {
+  display: flex;
+}
+.mapboxgl-ctrl-group {
+  flex-direction: column;
+}

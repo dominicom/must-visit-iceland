@@ -4,6 +4,8 @@ import ReactMapGL, { ScaleControl, NavigationControl, Popup } from 'react-map-gl
 import LocationMarker from './LocationMarker';
 import InfoWindow from './InfoWindow';
 
+import './Map.css';
+
 const TOKEN = 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ';
 
 class Map extends Component {
@@ -46,10 +48,22 @@ class Map extends Component {
         mapboxApiAccessToken={TOKEN}
         onClick={infoWindow ? () => closeInfoWindow() : null}
       >
-        {/* 
-          <NavigationControl />
-          <ScaleControl /> 
-        */}
+        <div className="map-control navigation-control">
+          <NavigationControl 
+            style={{
+              position: `absolute`,
+              top: 0,
+              left: 0
+            }}/>
+        </div>
+        <div className="map-control scale-control">
+          <ScaleControl
+            style={{
+              bottom: 0,
+              left: 0
+            }}/>
+        </div>
+       
         {locations.map(location => (
             <LocationMarker
               key={location.id}

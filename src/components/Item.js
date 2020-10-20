@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import * as FocusTrap from '../utils/FocusTrap';
 
+
+import Image from '../images/image-off-outline.svg';
+
 import Button from './Button';
 
 import './Item.css';
@@ -27,9 +30,12 @@ class Item extends Component {
   }
 
 
+
   render () {
     const { location, openModal, panel } = this.props;
     const { isToggleOn } = this.state;
+
+    console.log(location.photos ? "jest" : "nie ma")
 
     return (
       <div className={`item details-${isToggleOn ? 'show' : 'hidden'}`}
@@ -41,6 +47,7 @@ class Item extends Component {
                        ( `Location ${location.title}, ${location.category.join(', ')} click for more details`)
                        }>
         <a 
+          className={`item-link${isToggleOn ? " expanded" : ""}`}
           aria-disabled={isToggleOn ? true : false}
           aria-label={`Rollout popup for ${location.name}`}
           onClick={(event) => {
@@ -52,6 +59,7 @@ class Item extends Component {
             <h4>{location.altname ? location.altname : `${location.title} ${location.category[0]}`}</h4>
             <h2>{location.name}</h2>
           </div>
+          <Chevron isToggleOn={isToggleOn} />
         </a>
 
         {/* If location name is clicked then rollups some extra details */}
@@ -63,16 +71,25 @@ class Item extends Component {
                 <li key={tag} className="tag">{tag}</li>
               ))}
             </ul>
+            
+            {location.photos && location.photos.length !== 0 ? (
+              <ul className="item-list-images">
+                {location.photos.map(photo => (
+                  <li key={photo}
+                      style={{ backgroundImage: `url(${photo})` }}
+                      className="photo"
+                      role="img">
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="item-list-images empty-state">
+                <img width={32} height={32} src={Image} alt="Image off icon" aria-label="Image was not loaded" />
+                <p>Image was not loaded</p>
+              </div>
+            )} 
 
-            <ul className="item-list-images">
-              {location.photos.map(photo => (
-                <li key={photo}
-                    style={{ backgroundImage: `url(${photo})` }}
-                    className="photo"
-                    role="img">
-                </li>
-              ))}
-            </ul>
+
 
             <div className="item-list-bottom-panel">
 
@@ -107,4 +124,17 @@ class Item extends Component {
 export default Item;
 
 
-const EmptyState = () => <div className="item-list-empty-state" />
+const EmptyState = () => <div className="item-list-empty-state" />;
+
+const Chevron = ({ isToggleOn }) => (
+  <div className="chevron-icon">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+
+      {isToggleOn ? (
+        <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+      ) : (
+        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+      )}
+    </svg>
+  </div>
+);

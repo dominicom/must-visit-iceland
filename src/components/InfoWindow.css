@@ -21,11 +21,16 @@
   font-size: 1.125rem;
 }
 .info-window-thumbnail {
-  background-color: var(--light-gray-color);
+  background-color: var(--medium-gray-color);
   background-size: cover;
   width: 12rem;
   height: 8rem;
   overflow: hidden;
+}
+.info-window-thumbnail.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-window-action-panel {

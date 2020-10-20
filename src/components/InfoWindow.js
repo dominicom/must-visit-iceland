@@ -7,6 +7,8 @@ import * as FocusTrap from '../utils/FocusTrap';
 import Button from './Button';
 import CloseButton from './CloseButton';
 
+import Image from '../images/image-off-outline.svg';
+
 import './InfoWindow.css';
 
 
@@ -27,11 +29,19 @@ const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coor
             <h2>{info.name}</h2>
           </div>
 
-          <div 
-            className="info-window-thumbnail"
-            style={{ backgroundImage: `url(${info.photos[0]})` }}
-            role="img"
-          />
+
+          {info.photos && info.photos.length !== 0 ? (
+              <div 
+                className="info-window-thumbnail"
+                style={{ backgroundImage: `url(${info.photos[0]})` }}
+                role="img"
+              />
+            ) : (
+              <div className="info-window-thumbnail empty-state">
+                <img width={32} height={32} src={Image} alt="Image off icon" aria-label="Image was not loaded" />
+              </div>
+            )} 
+
           
           <div className="info-window-action-panel">
             <Button 

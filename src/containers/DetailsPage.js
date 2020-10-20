@@ -42,31 +42,33 @@ const DetailsPage = (props) => {
                 </h2>
               </div>
               <div className="modal-body">
-                <section className="photos">
-                  <p className="section-name">Gallery</p>
-                  <ul className="photos-gallery">
-                    {marker.photos ? marker.photos.map(photo => (
-                      <li key={photo}>
-                        <a href={photo}
-                          target="_blank"
-                          aria-label={`Image of ${marker.name}`}>
-                          <div className="photo"
-                            style={{ backgroundImage: `url(${photo})` }}
-                            role="img">
-                          </div>
-                        </a>
-                      </li>
-                    )) : null}
-                    {/* TO-DO: Place holder */}
-                  </ul>
+                {marker.photos && (
+                  <section className="photos">
+                    <p className="section-name">Gallery</p>
+                    <ul className="photos-gallery">
+                      {marker.photos ? marker.photos.map(photo => (
+                        <li key={photo}>
+                          <a href={photo}
+                            target="_blank"
+                            aria-label={`Image of ${marker.name}`}>
+                            <div className="photo"
+                              style={{ backgroundImage: `url(${photo})` }}
+                              role="img">
+                            </div>
+                          </a>
+                        </li>
+                      )) : null}
+                      {/* TO-DO: Place holder */}
+                    </ul>
 
 
-                  <div className="photos-link">
-                    <span>Powered by Flickr</span>
-                    <Link to={`https://www.flickr.com/search/?text=${marker.title}`} arrow label="More photos" />
-                  </div>
+                    <div className="photos-link">
+                      <span>Powered by Flickr</span>
+                      <Link to={`https://www.flickr.com/search/?text=${marker.title}`} arrow label="More photos" />
+                    </div>
 
-                </section>
+                  </section>
+                )}
 
 
                 <section className="facts" tabIndex="0">

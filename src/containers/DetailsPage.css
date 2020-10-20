@@ -19,9 +19,6 @@
   flex-direction: column;
   background-color: var(--white-color);
   font-size: 0.875rem;
-
-  /* TODO */
-  /* height: calc(100vh - 120px); */
   transition: 0.3s;
   margin: 60px auto 0 auto;
   border-radius: 5px;
@@ -33,9 +30,6 @@
 .location-detail-page {
   padding: 1rem 0;
   outline: none;
-}
-.location-detail-page section {
-  margin: 0.5em 0;
 }
 
 
@@ -124,7 +118,7 @@
   margin: 0 0.5em 0.5em 0;
   width: 175px;
   height: 120px;
-  background-color: var(--light-gray-color);
+  background-color: var(--medium-gray-color);
 }
 .photos-gallery li:last-child {
   margin-right: 0;
