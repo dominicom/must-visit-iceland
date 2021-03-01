@@ -35,8 +35,6 @@ class Item extends Component {
     const { location, openModal, panel } = this.props;
     const { isToggleOn } = this.state;
 
-    console.log(location.photos ? "jest" : "nie ma")
-
     return (
       <div className={`item details-${isToggleOn ? 'show' : 'hidden'}`}
            tabIndex={panel ? 0 : -1}
@@ -94,7 +92,7 @@ class Item extends Component {
             <div className="item-list-bottom-panel">
 
               <Button 
-                // type="secondary"
+                type="ghost"
                 ariaLabel={`Hide ditails of ${location.name}`}
                 onClick={() => this.setState({ isToggleOn: false })}
                 label="Hide"

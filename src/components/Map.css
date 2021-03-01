@@ -5,7 +5,7 @@
 }
 .map-control.navigation-control {
   top: 0;
-  left: 0;
+  right: 0;
 }
 .map-control.scale-control {
   bottom: 0;

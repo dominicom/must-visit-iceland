@@ -19,7 +19,7 @@ import './Main.css';
 
 class MainContainer extends Component {
   static propTypes = {
-    // panel: PropTypes.bool.isRequired,
+    panel: PropTypes.bool.isRequired,
     locations: PropTypes.array.isRequired,
     eventHandler: PropTypes.func.isRequired
   }
@@ -45,12 +45,6 @@ class MainContainer extends Component {
   }
 
 
-
-  eventHandler = (location, pos) => {
-    // this.setState({ marker: location });
-    this.props.eventHandler(location, pos)
-  }
-
   // This function draws error message window below header when some data are not loaded
   drawError = (connection, wiki, flickr) => {
     return (
@@ -74,6 +68,7 @@ class MainContainer extends Component {
     const { 
       viewport,
       onViewportChange,
+      eventHandler,
       panel,
       locations, 
       marker, 
@@ -106,7 +101,7 @@ class MainContainer extends Component {
           marker={marker}
           viewport={viewport}
           onViewportChange={onViewportChange}
-          eventHandler={this.props.eventHandler}
+          eventHandler={eventHandler}
           closeInfoWindow={closeInfoWindow}
           infoWindow={infoWindow}
           openModal={openModal}

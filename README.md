@@ -2,7 +2,7 @@
 
 **Neighborhood Map** — original project name customized into personal graphics theme.
 
-Student Project #8 (Final) during Google Front-End Development Nanodegree Program at Udacity made with React.
+Student Project #8 (Final) during Front-End Development Nanodegree Program at Udacity made with React.
 
 **[See live project](https://dominicom.github.io/must-visit-iceland/)**
 
@@ -23,16 +23,25 @@ This is **Final** student project made for Udacity classroom on Front-End Web De
 ```
 <App />
   <Header />
+    <Navigation />
+      <Hamburger />
 
   <SidePanel />
-    <Hamburger />
+    
     <DebounceInput />
     <Item />
 
-  <Map />
+  <Main />
+
     <DetailsPage />
-    <GoogleMapReact />
-      <Marker />
+
+    <Map />
+      <ReactMapGL />
+        <LocationMarker>
+          <Marker /> (mapbox)
+        
+        <InfoWindow />
+          <Popup /> (mapbox)
 
 ```
 
@@ -73,7 +82,7 @@ Application, UI/UX, graphics are designed by the **Author**. Images powered by [
 
 #### Dependencies & used APIs
 
-* Google Map React - [`google-map-react`](https://www.npmjs.com/package/google-map-react)
+* Mapbox GL JS with React wrapper ReactMap GL - [`react-map-gl`](https://www.npmjs.com/package/react-map-gl)
 * Prop-Types [`prop-types`](https://www.npmjs.com/package/prop-types)
 * Debounce Input [`react-debounce-input`](https://www.npmjs.com/package/react-debounce-input)
 * Escape RegExp [`escape-string-regexp`](https://www.npmjs.com/package/escape-string-regexp)

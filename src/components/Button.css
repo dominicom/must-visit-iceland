@@ -60,3 +60,14 @@
 .btn-accent:active {
   background-color: var(--accent-color-darker-alt);
 }
+
+.btn-ghost {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+.btn-ghost:hover {
+  background-color: var(--light-gray-color);
+}
+.btn-ghost:active {
+  background-color: var(--medium-gray-color);
+}

@@ -8,10 +8,10 @@ import './Header.css';
 
 const Header = ({ toggle, panel }) => (
   <header className={`header-container panel-${panel ? 'show' : 'hidden'}`}>
-    <div className="logo" role="banner">
+    <a href="/" className="logo" role="banner">
       <img className="flag" alt="Logo" src={Flag}/>
       <h2 className="app-name">Must Visit Iceland</h2>
-    </div>
+    </a>
     <Navigation 
       toggle={toggle}
       panel={panel}

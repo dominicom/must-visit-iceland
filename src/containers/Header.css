@@ -13,6 +13,7 @@
   height: 4rem;
   display: flex;
   flex-wrap: nowrap;
+  text-decoration: none;
 }
 
 .flag {

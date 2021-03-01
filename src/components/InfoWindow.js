@@ -12,8 +12,8 @@ import Image from '../images/image-off-outline.svg';
 import './InfoWindow.css';
 
 
-const InfoWindow = ({ marker, info, infoWindow, closeInfoWindow, openModal, coordinates }) => {
-    console.log("InfoWindow, marker:", info, infoWindow);
+const InfoWindow = ({ marker, info, closeInfoWindow, openModal }) => {
+
     return (
       <Popup 
         tipSize={8}

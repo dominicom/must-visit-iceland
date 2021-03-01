@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, { ScaleControl, NavigationControl, Popup } from 'react-map-gl';
+import ReactMapGL, { ScaleControl, NavigationControl } from 'react-map-gl';
 
 import LocationMarker from './LocationMarker';
 import InfoWindow from './InfoWindow';
@@ -33,8 +33,6 @@ class Map extends Component {
       marker, 
       closeInfoWindow, 
       infoWindow, 
-      modal, 
-      closeModal, 
       openModal, 
     } = this.props
 
@@ -49,19 +47,10 @@ class Map extends Component {
         onClick={infoWindow ? () => closeInfoWindow() : null}
       >
         <div className="map-control navigation-control">
-          <NavigationControl 
-            style={{
-              position: `absolute`,
-              top: 0,
-              left: 0
-            }}/>
+          <NavigationControl />
         </div>
         <div className="map-control scale-control">
-          <ScaleControl
-            style={{
-              bottom: 0,
-              left: 0
-            }}/>
+          <ScaleControl />
         </div>
        
         {locations.map(location => (
