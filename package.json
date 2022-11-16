@@ -16,10 +16,10 @@
     "react-leaflet": "^2.7.0",
     "react-map-gl": "^5.2.8",
     "react-mapbox-gl": "^4.8.6",
-    "react-scripts": "1.1.4"
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
-    "react-scripts": "1.1.4"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
